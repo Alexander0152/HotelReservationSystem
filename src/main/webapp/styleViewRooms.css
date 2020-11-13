@@ -1,0 +1,213 @@
+body {
+    margin: 0 auto;
+    font-family: "Century Gothic";
+    background-image: url("images/more.jpg");
+    background-repeat: round space;
+    background-attachment: fixed;
+}
+/* Header/logo Title */
+.header {
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.84);
+    color: black;
+}
+/* Style the top navigation bar */
+#navbarLogin {
+    overflow: hidden;
+    text-align: right;
+    background-color: rgba(255, 235, 205, 0.9);
+    /*z-index:2;*/
+}
+#navbarLogin a {
+    float: none;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+#navbarLogin a:hover {
+    background-color: #ddd;
+    color: black;
+}
+#navbar {
+    overflow: hidden;
+    text-align: center;
+    background-color: rgba(255, 235, 205, 0.9);
+    z-index:2;
+}
+#navbar a {
+    float: none;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+#navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+#navbar a.active {
+    background-color: blue;
+    color: white;
+}
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky + .content {
+    padding-top: 60px;
+}
+img{
+    position: absolute;
+}
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1000px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1000px;
+    text-align: center;
+    font-size: 26px;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 45px;
+    right: 75px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+.text-blockEconomy {
+    position: absolute;
+    bottom: 20px;
+    top: 350px;
+    left: 805px;
+    width: 900px;
+    height: 406px;
+    background-color: rgba(0, 0, 0, 0.77);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.text-blockLux {
+    position: absolute;
+    bottom: 20px;
+    top: 876px;
+    left: 805px;
+    width: 900px;
+    height: 389px;
+    background-color: rgba(0, 0, 0, 0.77);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.text-blockVip {
+    position: absolute;
+    bottom: 20px;
+    top: 1385px;
+    left: 805px;
+    width: 900px;
+    height: 410px;
+    background-color: rgba(0, 0, 0, 0.77);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.text-blockPresident {
+    position: absolute;
+    bottom: 20px;
+    top: 1915px;
+    left: 805px;
+    width: 900px;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.77);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.economyPrice{
+    position: absolute;
+    top: 750px;
+    left: 805px;
+}
+/* 100% Image Width on Smaller Screens */
+/*@media only screen and (max-width: 700px) {*/
+/*    .modal-content {*/
+/*        width: 100%;*/
+/*    }*/
