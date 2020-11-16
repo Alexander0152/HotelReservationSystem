@@ -4,6 +4,8 @@
 <head>
 <%--    <script type="text/javascript" src="../javascript/jquery/search_jquery.ui.datepicker.js"></script>--%>
     <link rel="stylesheet" href="styleMain.css">
+    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="webjars/momentjs/2.5.1/moment.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Main page</title>
 </head>
@@ -20,7 +22,8 @@
 
 <div id="SignInModal" class="modal">
 
-    <form class="modal-content animate" action="/action_page.php" method="post">
+<%--    <form class="modal-content animate" action="/action_page.php" method="post">--%>
+    <form class="modal-content animate"  method="post">
         <div class="imgcontainer">
             <span onclick="document.getElementById('SignInModal').style.display='none'" class="closeSigInButton" title="Close Modal">&times;</span>
             <img src="images/loginPicture.png" alt="Avatar" class="avatar">
@@ -133,7 +136,7 @@
                 <p></p>
 
                 <label for="startDate">Check in</label>
-                <input type="date" id="startDate" name="startDate" onSelect="getSelectedDate(startDate)">
+                <input type="date" id="startDate" name="startDate" onchange="getSelectedDate();">
 <%--                       min="2020-11-11" max="2021-11-11">--%>
 
                 <label for="endDate"> Check out</label>
@@ -167,11 +170,12 @@
 
     var startDate = document.getElementById("startDate");
     startDate.value = getTodayDate();
-    startDate.setAttribute("min",startDate.value)
+    startDate.setAttribute("min",startDate.value);
 
     var endDate = document.getElementById("endDate");
+    // endDate.value = getTodayDatePlusOneDay();
     endDate.value = getTodayDatePlusOneDay();
-    endDate.setAttribute("min",endDate.value)
+    endDate.setAttribute("min",endDate.value);
 
     function myFunction() {
         if (window.pageYOffset >= sticky) {
@@ -186,7 +190,7 @@
         y = n.getFullYear();
         m = n.getMonth() + 1;
         d = n.getDate();
-        return y + "-" + d + "-" + m;
+        return y + "-" + m + "-" + d;
     }
 
     function getTodayDatePlusOneDay() {
@@ -195,22 +199,24 @@
         y = n.getFullYear();
         m = n.getMonth() + 1;
         d = n.getDate();
-        return y + "-" + d + "-" + m;
+        return y + "-" + m + "-" + d;
+    }
+    function getDatePlusOneDay(date) {
+        n =  new Date(date);
+        n.setDate(n.getDate() + 1);
+        return moment(n).format('YYYY-MM-DD');
     }
 
-    function getSelectedDate(selectedDate) {
-        alert(selectedDate);
+    function getSelectedDate() {
+        var value = document.getElementById("startDate").value;
+        endDate.setAttribute("min",getDatePlusOneDay(value));
     }
 
-
-    // function getSelectedDatePlusOneDay(id) {
-    //     n =  new Date();
-    //     n.setDate(n.getDate() + 1)
-    //     y = n.getFullYear();
-    //     m = n.getMonth() + 1;
-    //     d = n.getDate();
-    //     return y + "-" + d + "-" + m;
+    // function chooseDateIn(selectedDate) {
+    //     startDate.value = selectedDate;
+    //     endDate.setAttribute("min",getTodayDatePlusOneDay(startDate.value));
     // }
+
 </script>
 </body>
 </html>
