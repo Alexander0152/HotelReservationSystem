@@ -14,7 +14,7 @@
         <title>Rooms catalog </title>
     </head>
 </head>
-<body >
+<body>
 <div id="navbarLogin">
     <a href="ViewRoomsServlet">Sign in</a>
     <a href="javascript:void(0)">Login</a>
@@ -29,7 +29,7 @@
     <a href="javascript:void(0)">Contact</a>
 </div>
 
-<img id="Economy" img src="images/Economy.jpg" alt="Economy" style="left: 120px; top: 350px;" width="660" height="426" onclick="increaseImage(id)">
+<img id="Economy" img src="images/Economy1.jpg" alt="Economy" style="left: 120px; top: 350px;" width="660" height="426" onclick="increaseImage(id)">
 <img id="Lux "img src="images/Lux.jpg" alt="Lux" style="left: 120px; top: 876px;" width="660" height="409" onclick="increaseImage(id)">
 <img id="Vip" img src="images/Vip.jpg" alt="Vip" style="left: 120px; top: 1385px;" width="660" height="430" onclick="increaseImage(id)">
 <img id="President" img src="images/President.jpg" alt="President" style="left: 120px; padding-bottom: 15px; top: 1915px;" width="660" height="420" onclick="increaseImage(id)">

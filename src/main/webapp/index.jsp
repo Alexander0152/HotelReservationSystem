@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page isELIgnored ="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <%--    <script type="text/javascript" src="../javascript/jquery/search_jquery.ui.datepicker.js"></script>--%>
@@ -10,81 +12,7 @@
     <title>Main page</title>
 </head>
 <body>
-<div id="navbarLogin">
-    <a onclick="document.getElementById('LoginModal').style.display='block'" style="width:auto;">Login</a>
-    <a onclick="document.getElementById('SignInModal').style.display='block'" style="width:auto;">Sign in</a>
-</div>
-
-<div class="header">
-    <h1>Claverton</h1>
-    <p>Hotel and restaurant</p>
-</div>
-
-<div id="SignInModal" class="modal">
-
-<%--    <form class="modal-content animate" action="/action_page.php" method="post">--%>
-    <form class="modal-content animate"  method="post">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('SignInModal').style.display='none'" class="closeSigInButton" title="Close Modal">&times;</span>
-            <img src="images/loginPicture.png" alt="Avatar" class="avatar">
-        </div>
-
-        <div class="container">
-            <label for="uname" style="display: block; text-align: center;"><b>Name</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-
-            <label for="psw" style="display: block; text-align: center;"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit" style="  background-color: orange; color: purple; padding: 14px 20px;
-             margin: 8px 0; border: none; cursor: pointer; font-size: 17px; font-weight: bold;
-              width: 100%;">Sign in</button>
-
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
-</div>
-
-<%--<button onclick="document.getElementById('LoginModal').style.display='block'" style="width:auto;">Sign Up</button>--%>
-
-<div id="LoginModal" class="modal">
-    <form class="modal-content animate" action="/action_page.php" method="post">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('LoginModal').style.display='none'" class="closeLoginButton" title="Close Modal">&times;</span>
-        </div>
-
-        <div class="container">
-            <h1 style="display: block; text-align: center;">Login</h1>
-            <p style="display: block; text-align: center;">Please fill in this form to create an account.</p>
-            <hr>
-            <label for="email" style="display: block; text-align: center;"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-
-            <label for="psw" style="display: block; text-align: center;"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <label for="psw-repeat" style="display: block; text-align: center;"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-
-            <label>
-                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-            </label>
-
-            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-            <div class="clearfix">
-                <button type="button" onclick="document.getElementById('LoginModal').style.display='none'" class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn">Sign Up</button>
-            </div>
-        </div>
-    </form>
-</div>
+<jsp:include page="user/home.jsp"/>
 
 <div id="navbar">
     <a href="ViewRoomsServlet">Rooms</a>
@@ -99,56 +27,83 @@
         </div>
 
         <div class="userInfo-form">
-            <h2>Gender</h2>
-            <form action="Servlet" method="post">
-                <input type="radio" id="gender" name="gender" value="Male"> Male<br>
-                <input type="radio" id="gender" value="Female"> Female<br>
-                <input type="radio" id="gender" value="Family"> Family
+            <form action="SearchRoomsServlet" method="get">
 
-                <p></p>
+                <label for="type">Adults</label>
+                <select name="amountOfAdults" id="amountOfAdults">
+                    <option class="comboboxRoomType" value="1">1</option>
+                    <option class="comboboxRoomType" value="2">2</option>
+                    <option class="comboboxRoomType" value="3">3</option>
+                    <option class="comboboxRoomType" value="4">4</option>
+                </select>
+
+                <label for="type">Children</label>
+                <select name="amountOfChildren" id="amountOfChildren">
+                    <option class="comboboxRoomType" value="1">0</option>
+                    <option class="comboboxRoomType" value="2">1</option>
+                    <option class="comboboxRoomType" value="3">2</option>
+                    <option class="comboboxRoomType" value="4">3</option>
+                </select><br><br>
+
 
                 <label for="type">Room type</label>
                 <select name="roomType" id="type">
+                    <option class="comboboxRoomType" value="allTypes">All types</option>
                     <option class="comboboxRoomType" value="economy">Economy</option>
                     <option class="comboboxRoomType" value="lux">Lux</option>
                     <option class="comboboxRoomType" value="vip">Vip</option>
                     <option class="comboboxRoomType" value="president">President</option>
-                </select>
-
-                <p></p>
-
-                <label for="type">Amount of persons</label>
-                <select name="amountOfPersons" id="amountOfPersons">
-                    <option class="comboboxRoomType" value="1">1</option>
-                    <option class="comboboxRoomType" value="2">2</option>
-                    <option class="comboboxRoomType" value="3">3</option>
-                </select>
-
-                <p></p>
+                </select><br><br>
 
                 <label for="type">Amount of rooms</label>
                 <select name="amountOfRooms" id="amountOfRooms">
+                    <option class="comboboxRoomType" value="any">Any</option>
                     <option class="comboboxRoomType" value="1">1</option>
                     <option class="comboboxRoomType" value="2">2</option>
                     <option class="comboboxRoomType" value="3">3</option>
-                </select>
-
-                <p></p>
+                </select><br><br>
 
                 <label for="startDate">Check in</label>
                 <input type="date" id="startDate" name="startDate" onchange="getSelectedDate();">
-<%--                       min="2020-11-11" max="2021-11-11">--%>
 
                 <label for="endDate"> Check out</label>
-                <input type="date" id="endDate" name="endDate">
-<%--                <input type="submit" class="btn btn-primary btn-large btn-block" value="login">--%>
+                <input type="date" id="endDate" name="endDate"><br><br>
+
+                <button class="searchRoomsButton" input type="submit" style="vertical-align:middle"><span>Search rooms</span></button>
             </form>
-            <form>
-                <a class="login-link" href="ViewRoomsServlet">Show rooms</a>
-            </form>
+<%--            <form>--%>
+<%--                <a class="login-link" href="ViewRoomsServlet">Show rooms</a>--%>
+<%--            </form>--%>
         </div>
     </div>
 </div>
+<%--<div class="view_content">--%>
+<%--    <table>--%>
+<%--        <caption>Rooms</caption>--%>
+<%--        <thead>--%>
+<%--        <tr>--%>
+<%--            <td>id</td>--%>
+<%--            <td>number</td>--%>
+<%--            <td>type</td>--%>
+<%--        </tr>--%>
+<%--        </thead>--%>
+<%--        <tbody>--%>
+<%--        <c:forEach var="item" items="${rooms}}">--%>
+<%--            <tr>--%>
+<%--                <td>${item.id}</td>--%>
+<%--                <td>${item.number}</td>--%>
+<%--                <td>${item.type}</td>--%>
+<%--                <td>--%>
+<%--                    <form action="TakeBookServlet">--%>
+<%--                        <input type="hidden" name="id" value="${item.id}">--%>
+<%--                        <input type="submit" value="Take book" class="button">--%>
+<%--                    </form>--%>
+<%--                </td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
+<%--        </tbody>--%>
+<%--    </table>--%>
+<%--</div>--%>
 <script>
     // Get the modal
     var modalSignIn = document.getElementById('SignInModal');
@@ -210,6 +165,7 @@
     function getSelectedDate() {
         var value = document.getElementById("startDate").value;
         endDate.setAttribute("min",getDatePlusOneDay(value));
+        endDate.value = getDatePlusOneDay(value);
     }
 
     // function chooseDateIn(selectedDate) {
