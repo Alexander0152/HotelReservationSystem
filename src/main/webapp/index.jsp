@@ -25,7 +25,6 @@
         <div class="app-title">
             <h1>Booking</h1>
         </div>
-
         <div class="userInfo-form">
             <form action="SearchRoomsServlet" method="get">
 
@@ -39,10 +38,10 @@
 
                 <label for="type">Children</label>
                 <select name="amountOfChildren" id="amountOfChildren">
-                    <option class="comboboxRoomType" value="1">0</option>
-                    <option class="comboboxRoomType" value="2">1</option>
-                    <option class="comboboxRoomType" value="3">2</option>
-                    <option class="comboboxRoomType" value="4">3</option>
+                    <option class="comboboxRoomType" value="0">0</option>
+                    <option class="comboboxRoomType" value="1">1</option>
+                    <option class="comboboxRoomType" value="2">2</option>
+                    <option class="comboboxRoomType" value="3">3</option>
                 </select><br><br>
 
 
@@ -50,18 +49,15 @@
                 <select name="roomType" id="type">
                     <option class="comboboxRoomType" value="allTypes">All types</option>
                     <option class="comboboxRoomType" value="economy">Economy</option>
+                    <option class="comboboxRoomType" value="economyFamily">Economy family</option>
                     <option class="comboboxRoomType" value="lux">Lux</option>
+                    <option class="comboboxRoomType" value="luxFamily">Lux family</option>
                     <option class="comboboxRoomType" value="vip">Vip</option>
                     <option class="comboboxRoomType" value="president">President</option>
-                </select><br><br>
-
-                <label for="type">Amount of rooms</label>
-                <select name="amountOfRooms" id="amountOfRooms">
-                    <option class="comboboxRoomType" value="any">Any</option>
-                    <option class="comboboxRoomType" value="1">1</option>
-                    <option class="comboboxRoomType" value="2">2</option>
-                    <option class="comboboxRoomType" value="3">3</option>
-                </select><br><br>
+                    <label>
+                        <input type="checkbox" id = "separateRoom" checked="checked" name="separateRoom" style="margin-bottom:15px; margin-left: 20px"> Separate room
+                    </label><br><br>
+                </select>
 
                 <label for="startDate">Check in</label>
                 <input type="date" id="startDate" name="startDate" onchange="getSelectedDate();">

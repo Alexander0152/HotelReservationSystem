@@ -3,7 +3,7 @@ package businessLayer;
 public class Room {
     private int id;
     private int number;
-    private int amountOfPersons;
+    private int amountOfAdults;
     private int amountOfChildren;
     private int amountOfRooms;
     private String type;
@@ -30,12 +30,12 @@ public class Room {
     }
 
 
-    public int getAmountOfPersons() {
-        return amountOfPersons;
+    public int getAmountOfAdults() {
+        return amountOfAdults;
     }
 
-    public void setAmountOfPersons(int amountOfPersons) {
-        this.amountOfPersons = amountOfPersons;
+    public void setAmountOfAdults(int amountOfAdults) {
+        this.amountOfAdults = amountOfAdults;
     }
 
 

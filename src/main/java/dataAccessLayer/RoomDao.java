@@ -47,17 +47,17 @@ public class RoomDao {
         Statement st = con.createStatement();
         String sql = ("SELECT * FROM rooms");
         ResultSet rs = st.executeQuery(sql);
-        while (rs.next()) {
 
+        while (rs.next()) {
             Room room = new Room();
 
             room.setId(Integer.parseInt(rs.getString("id")));
             room.setNumber(rs.getInt("number"));
-            room.setAmountOfPersons(rs.getInt("amount_of_persons"));
+            room.setAmountOfAdults(rs.getInt("amount_of_persons"));
             room.setAmountOfChildren(rs.getInt("amount_of_children"));
             room.setAmountOfRooms(rs.getInt("amount_of_rooms"));
             room.setType(rs.getString("type"));
-            room.setPriceForOneNight(rs.getDouble("price"));
+            room.setPriceForOneNight(rs.getDouble("price_for_one_night"));
 
             rooms.add(room);
         }
