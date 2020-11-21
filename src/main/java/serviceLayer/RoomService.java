@@ -1,5 +1,6 @@
 package serviceLayer;
 
+import businessLayer.Booking;
 import businessLayer.Room;
 import dataAccessLayer.RoomDao;
 
@@ -8,19 +9,17 @@ import java.util.*;
 
 public class RoomService {
 
-    public List<Room> roomList;
-
-    public List<Room> getAllRooms(String filePath) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public List<Room> getAllExistingRooms(String filePath) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         RoomDao dao = new RoomDao(filePath);
-        return dao.getRooms();
+        return dao.getAllExistingRooms();
     }
 
-    public List<Room> finedRooomsByСriterias(List<Room> list) {
-        List<Room> roomList = new ArrayList<>();
-        for(Room book: list){
-
-
-        }
-        return roomList;
-    }
+//    public List<Room> finedRooomsByСriterias(List<Room> list) {
+//        List<Room> roomList = new ArrayList<>();
+//        for(Room book: list){
+//
+//
+//        }
+//        return roomList;
+//    }
 }

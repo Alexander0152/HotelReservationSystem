@@ -19,7 +19,7 @@ public class RoomDao {
         this.connectionFileName = connectionFileName;
     }
 
-    public List<Room> getRooms() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+    public List<Room> getAllExistingRooms() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
 
         String host = "";
         String login = "";
@@ -46,6 +46,52 @@ public class RoomDao {
 
         Statement st = con.createStatement();
         String sql = ("SELECT * FROM rooms");
+        ResultSet rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+            Room room = new Room();
+
+            room.setId(Integer.parseInt(rs.getString("id")));
+            room.setNumber(rs.getInt("number"));
+            room.setAmountOfAdults(rs.getInt("amount_of_persons"));
+            room.setAmountOfChildren(rs.getInt("amount_of_children"));
+            room.setAmountOfRooms(rs.getInt("amount_of_rooms"));
+            room.setType(rs.getString("type"));
+            room.setPriceForOneNight(rs.getDouble("price_for_one_night"));
+
+            rooms.add(room);
+        }
+        con.close();
+//        return (ArrayList<Room>) rooms;
+        return rooms;
+    }
+    public List<Room> getAllBookings() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+
+        String host = "";
+        String login = "";
+        String password = "";
+        FileInputStream fis;
+        Properties property = new Properties();
+
+        try {
+            fis = new FileInputStream(connectionFileName);
+            property.load(fis);
+
+            host = property.getProperty("db.host");
+            login = property.getProperty("db.login");
+            password = property.getProperty("db.password");
+
+        } catch (IOException e) {
+            System.err.println("Error: File doesn't exist!");
+        }
+
+        List<Room> rooms = new ArrayList<>();
+
+        Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        Connection con = DriverManager.getConnection(host, login, password);
+
+        Statement st = con.createStatement();
+        String sql = ("SELECT * FROM reserved");
         ResultSet rs = st.executeQuery(sql);
 
         while (rs.next()) {

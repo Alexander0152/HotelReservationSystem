@@ -1,6 +1,8 @@
 package servlets;
 
+import businessLayer.Booking;
 import businessLayer.Room;
+import serviceLayer.BookingService;
 import serviceLayer.RoomService;
 
 import javax.servlet.RequestDispatcher;
@@ -20,13 +22,14 @@ public class SearchRoomsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String propertyFilepath = "D:\\LABS_5_SEM\\OS_i_sist_progr\\CourseWork\\CourseWork\\resources\\connectionInfo.txt";
 
         RoomService roomService = new RoomService();
         HttpSession session=request.getSession();
 
         List<Room> rooms = null;
         try {
-            rooms = roomService.getAllRooms("D:\\LABS_5_SEM\\OS_i_sist_progr\\CourseWork\\CourseWork\\resources\\connectionInfo.txt");
+            rooms = roomService.getAllExistingRooms(propertyFilepath);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -72,7 +75,30 @@ public class SearchRoomsServlet extends HttpServlet {
                 }
             }
         }
-                                //get unique rooms:
+
+        BookingService bookingService = new BookingService();
+        List<Booking> bookings = null;
+        try {
+            bookings = bookingService.getAllBookings(propertyFilepath);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        for(Room room:matchedRooms){
+            for(Booking booking:bookings){
+                if(room.getNumber() == booking.getRoomNumber()){
+                    //campere dates...
+                }
+            }
+        }
+
+        //get unique rooms:
         List<Room> uniqueRooms = new ArrayList<>();
         Room firstUniqueRoom = matchedRooms.get(0);
         uniqueRooms.add(firstUniqueRoom);
