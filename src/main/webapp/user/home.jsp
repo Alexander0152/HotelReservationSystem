@@ -29,7 +29,7 @@
     <form class="modal-content animate"  method="post">
         <div class="imgcontainer">
             <span onclick="document.getElementById('SignInModal').style.display='none'" class="closeSigInButton" title="Close Modal">&times;</span>
-            <img src="images/loginPicture.png" alt="Avatar" class="avatar">
+            <img src="images/loginPicture.png" style="position: relative" alt="Avatar" class="avatar">
         </div>
 
         <div class="container">

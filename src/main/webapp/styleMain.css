@@ -179,6 +179,15 @@ span.psw {
     background-color: blue;
     color: white;
 }
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky + .content {
+    padding-top: 60px;
+}
 h2{
     font-size: 18px;
 }
@@ -187,7 +196,7 @@ h2{
     /*width: 300px;*/
     color: khaki;
     font-size: 26px;
-    margin-left: 160px;
+    margin-left: 245px;
 }
 .userInfo-form{
     margin-left: 125px;
@@ -200,8 +209,8 @@ h2{
     bottom: 10px;
     top: 300px;
     left: 70px;
-    width: 800px;
-    height: 600px;
+    width: 700px;
+    height: 460px;
     background-color: rgba(0, 0, 0, 0.77);
 }
 .comboboxRoomType{
@@ -250,11 +259,14 @@ h2{
     right: 0;
 }
 .view_content {
-    z-index: 1;
-    text-align: -webkit-center;
-    margin: 10px;
-    margin-top: 70px;
-    margin-left: 1100px;
+    position: absolute;
+    bottom: 10px;
+    top: 300px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 850px;
+    right: 40px;
+    /*right: 40px;*/
 }
 
 .view_content1 {
@@ -280,20 +292,21 @@ h2{
 
 .view_content td {
     color: black;
-    border-top: 1px solid #e8edff;
-    padding: 5px;
+    border-top: 1px black;
+    /*padding: 5px;*/
     font-size: 16pt;
     font-weight: bold;
+    text-align: center;
 
 }
 
 .view_content tr:nth-child(2n) {
-    background: rgba(237, 203, 100, 0.8);
+    background: rgba(245, 245, 220, 0.9);
 
 }
 
 .view_content tr{
-    background: #def5b3;
+    background: rgba(222, 184, 135, 0.9);
 
 }
 
@@ -303,7 +316,7 @@ h2{
     display: inline-block;
     width: auto;
     height: 45px;
-    padding: 0 5px;
+    padding: 0 9px;
     line-height: 45px;
     border-radius: 45px;
     font-family: 'Montserrat', sans-serif;
@@ -312,15 +325,15 @@ h2{
     text-align: center;
     letter-spacing: 3px;
     font-weight: 600;
-    color: #524f4e;
-    background: white;
+    color: white;
+    background: limegreen;
     box-shadow: 0 8px 15px rgba(0,0,0,.1);
     transition: .3s;
 }
 
 .view_content td .button:hover{
-    background: #2EE59D;
+    background: yellow;
     box-shadow: 0 15px 20px rgba(46,229,157,.4);
-    color: white;
+    color: black;
     transform: translateY(-7px);
 }

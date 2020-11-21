@@ -8,6 +8,7 @@ public class Room {
     private int amountOfRooms;
     private String type;
     private double priceForOneNight;
+    private String imageSrc;
 
     public Room(){
 
@@ -74,9 +75,12 @@ public class Room {
         this.priceForOneNight=priceForOneNight;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Book: " + name + ' ' +
-//                ", author " + author;
-//    }
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc=imageSrc;
+    }
+
 }

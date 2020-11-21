@@ -48,12 +48,12 @@
                 <label for="type">Room type</label>
                 <select name="roomType" id="type">
                     <option class="comboboxRoomType" value="allTypes">All types</option>
-                    <option class="comboboxRoomType" value="economy">Economy</option>
-                    <option class="comboboxRoomType" value="economyFamily">Economy family</option>
-                    <option class="comboboxRoomType" value="lux">Lux</option>
-                    <option class="comboboxRoomType" value="luxFamily">Lux family</option>
-                    <option class="comboboxRoomType" value="vip">Vip</option>
-                    <option class="comboboxRoomType" value="president">President</option>
+                    <option class="comboboxRoomType" value="Economy">Economy</option>
+                    <option class="comboboxRoomType" value="Economy family">Economy family</option>
+                    <option class="comboboxRoomType" value="Lux">Lux</option>
+                    <option class="comboboxRoomType" value="Lux family">Lux family</option>
+                    <option class="comboboxRoomType" value="Vip">Vip</option>
+                    <option class="comboboxRoomType" value="President">President</option>
                     <label>
                         <input type="checkbox" id = "separateRoom" checked="checked" name="separateRoom" style="margin-bottom:15px; margin-left: 20px"> Separate room
                     </label><br><br>
@@ -73,33 +73,6 @@
         </div>
     </div>
 </div>
-<%--<div class="view_content">--%>
-<%--    <table>--%>
-<%--        <caption>Rooms</caption>--%>
-<%--        <thead>--%>
-<%--        <tr>--%>
-<%--            <td>id</td>--%>
-<%--            <td>number</td>--%>
-<%--            <td>type</td>--%>
-<%--        </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <c:forEach var="item" items="${rooms}}">--%>
-<%--            <tr>--%>
-<%--                <td>${item.id}</td>--%>
-<%--                <td>${item.number}</td>--%>
-<%--                <td>${item.type}</td>--%>
-<%--                <td>--%>
-<%--                    <form action="TakeBookServlet">--%>
-<%--                        <input type="hidden" name="id" value="${item.id}">--%>
-<%--                        <input type="submit" value="Take book" class="button">--%>
-<%--                    </form>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
-<%--</div>--%>
 <script>
     // Get the modal
     var modalSignIn = document.getElementById('SignInModal');
@@ -163,11 +136,6 @@
         endDate.setAttribute("min",getDatePlusOneDay(value));
         endDate.value = getDatePlusOneDay(value);
     }
-
-    // function chooseDateIn(selectedDate) {
-    //     startDate.value = selectedDate;
-    //     endDate.setAttribute("min",getTodayDatePlusOneDay(startDate.value));
-    // }
 
 </script>
 </body>

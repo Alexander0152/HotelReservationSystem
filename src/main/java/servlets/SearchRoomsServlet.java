@@ -95,6 +95,27 @@ public class SearchRoomsServlet extends HttpServlet {
             appearence = false;
         }
 
+
+        for(Room room:uniqueRooms){
+            String roomType = room.getType();
+            switch (roomType){
+                case "Economy":
+                    room.setImageSrc("images/Economy1.jpg");
+                    break;
+                case "Economy family": room.setImageSrc("images/Economy1.jpg");
+                    break;
+                case "Lux": room.setImageSrc("images/Lux.jpg");
+                    break;
+                case "Lux family": room.setImageSrc("images/Lux.jpg");
+                    break;
+                case "Vip": room.setImageSrc("images/Vip.jpg");
+                    break;
+                case "President": room.setImageSrc("images/President.jpg");
+                    break;
+                default: room.setImageSrc("images/Economy1.jpg");
+            }
+        }
+
         request.setAttribute("rooms",uniqueRooms);
         RequestDispatcher dispatcher=null;
 

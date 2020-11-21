@@ -15,14 +15,8 @@
     </head>
 </head>
 <body>
-<div id="navbarLogin">
-    <a href="ViewRoomsServlet">Sign in</a>
-    <a href="javascript:void(0)">Login</a>
-</div>
-<div class="header">
-    <h1>Claverton</h1>
-    <p>Hotel and restaurant</p>
-</div>
+
+<jsp:include page="home.jsp"/>
 <div id="navbar">
     <a class="active" href="ViewRoomsServlet">Rooms</a>
     <a href="index.jsp">Booking</a>
@@ -88,9 +82,9 @@
 </div>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="myModal" class="imageModal">
     <span class="close">&times;</span>
-    <img class="modal-content" style="left: 455px; top: 200px;" id="img01">
+    <img class="imageModal-content" style="left: 455px; top: 200px;" id="img01">
     <div id="caption"></div>
 </div>
 
