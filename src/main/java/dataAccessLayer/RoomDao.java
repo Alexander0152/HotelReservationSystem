@@ -53,7 +53,7 @@ public class RoomDao {
 
             room.setId(Integer.parseInt(rs.getString("id")));
             room.setNumber(rs.getInt("number"));
-            room.setAmountOfAdults(rs.getInt("amount_of_persons"));
+            room.setAmountOfAdults(rs.getInt("amount_of_adults"));
             room.setAmountOfChildren(rs.getInt("amount_of_children"));
             room.setAmountOfRooms(rs.getInt("amount_of_rooms"));
             room.setType(rs.getString("type"));
@@ -65,7 +65,8 @@ public class RoomDao {
 //        return (ArrayList<Room>) rooms;
         return rooms;
     }
-    public List<Room> getAllBookings() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+
+    public List<Room> getAllRoomsByType(String type) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
 
         String host = "";
         String login = "";
@@ -91,7 +92,7 @@ public class RoomDao {
         Connection con = DriverManager.getConnection(host, login, password);
 
         Statement st = con.createStatement();
-        String sql = ("SELECT * FROM reserved");
+        String sql = String.format("SELECT* FROM rooms WHERE type = '%s';", type);
         ResultSet rs = st.executeQuery(sql);
 
         while (rs.next()) {
@@ -99,7 +100,7 @@ public class RoomDao {
 
             room.setId(Integer.parseInt(rs.getString("id")));
             room.setNumber(rs.getInt("number"));
-            room.setAmountOfAdults(rs.getInt("amount_of_persons"));
+            room.setAmountOfAdults(rs.getInt("amount_of_adults"));
             room.setAmountOfChildren(rs.getInt("amount_of_children"));
             room.setAmountOfRooms(rs.getInt("amount_of_rooms"));
             room.setType(rs.getString("type"));
@@ -108,7 +109,8 @@ public class RoomDao {
             rooms.add(room);
         }
         con.close();
-//        return (ArrayList<Room>) rooms;
+
         return rooms;
     }
+
 }

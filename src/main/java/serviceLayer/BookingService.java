@@ -17,4 +17,9 @@ public class BookingService {
         return dao.getAllBookings();
     }
 
+    public List<Booking> getAllBookingsByRoomNumber(String filePath, int number) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        BookingDao dao = new BookingDao(filePath);
+        return dao.getAllBookingsByRoomNumber(number);
+    }
+
 }

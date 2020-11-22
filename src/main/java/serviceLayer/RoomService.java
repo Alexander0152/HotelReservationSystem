@@ -14,6 +14,11 @@ public class RoomService {
         return dao.getAllExistingRooms();
     }
 
+    public List<Room> getAllRoomsByType(String filePath, String type) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        RoomDao dao = new RoomDao(filePath);
+        return dao.getAllRoomsByType(type);
+    }
+
 //    public List<Room> finedRooomsByСriterias(List<Room> list) {
 //        List<Room> roomList = new ArrayList<>();
 //        for(Room book: list){

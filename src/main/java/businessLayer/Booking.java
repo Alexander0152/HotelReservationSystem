@@ -9,6 +9,9 @@ public class Booking {
     private Date dateIn;
     private Date dateOut;
     private boolean separate;
+    private int amountOfAdults;
+    private int amountOfChildren;
+
 
     public int getId() {
         return id;
@@ -61,5 +64,21 @@ public class Booking {
     public void setSeparate(boolean separate) {
         this.separate = separate;
 
+    }
+
+    public int getAmountOfAdults() {
+        return amountOfAdults;
+    }
+
+    public void setAmountOfAdults(int amountOfAdults) {
+        this.amountOfAdults = amountOfAdults;
+    }
+
+    public int getAmountOfChildren() {
+        return amountOfChildren;
+    }
+
+    public void setAmountOfChildren(int amountOfChildren) {
+        this.amountOfChildren = amountOfChildren;
     }
 }
