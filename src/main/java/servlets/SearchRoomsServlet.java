@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
@@ -31,7 +32,10 @@ public class SearchRoomsServlet extends HttpServlet {
         int amountOfAdults = Integer.parseInt(request.getParameter("amountOfAdults"));
         int amountOfChildren = Integer.parseInt(request.getParameter("amountOfChildren"));
         String type = request.getParameter("roomType");
-        boolean separateRoom = Boolean.parseBoolean(request.getParameter("separateRoom"));
+        boolean separateRoom = false;
+        if (request.getParameter("separateRoom").compareTo("on") == 0) {
+            separateRoom = true;
+        }
 
         List<Room> rooms = null;
         List<Room> matchedRooms = new ArrayList<>();
@@ -85,17 +89,13 @@ public class SearchRoomsServlet extends HttpServlet {
             }
         }
 
-        //check it they are already booked or free
+        //check if they are already booked or free
         List<Room> availableRooms = new ArrayList<>();
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date dateIn = formatter.parse(request.getParameter("startDate"));
-            Date dateOut = new SimpleDateFormat("YYYY-MM-DD").parse(request.getParameter("endDate"));
-
             BookingService bookingService = new BookingService();
             List<Booking> bookings = null;
 
-            for (Room room : matchedRooms ) {
+            for (Room room : matchedRooms) {
 
                 try {
                     bookings = bookingService.getAllBookingsByRoomNumber(propertyFilepath, room.getNumber());
@@ -109,29 +109,34 @@ public class SearchRoomsServlet extends HttpServlet {
                     e.printStackTrace();
                 }
 
-                Calendar calendarDateIn = Calendar.getInstance();
-                calendarDateIn.setTime(dateIn);
-                Calendar calendarDateOut = Calendar.getInstance();
-                calendarDateOut.setTime(dateOut);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar selectedDateIn = Calendar.getInstance();
+                Calendar selectedDateOut = Calendar.getInstance();
+
+                selectedDateIn.setTime(df.parse(request.getParameter("startDate")));
+                selectedDateOut.setTime(df.parse(request.getParameter("endDate")));
 
                 int amountByDay = amountOfAdults + amountOfChildren;
 
                 boolean availability = true;
-                int i = 0;
-                while (calendarDateIn.before(calendarDateOut) || calendarDateIn.equals(calendarDateOut)) {
+                while (selectedDateIn.before(selectedDateOut) || selectedDateIn.equals(selectedDateOut)) {
 
                     for (Booking booking : bookings) {
 
-                        Calendar bookingDateIn = Calendar.getInstance();
-                        calendarDateIn.setTime(dateIn);
-                        Calendar bookingDateOut = Calendar.getInstance();
-                        bookingDateOut.setTime(booking.getDateOut());
+                        Calendar alreadyBookedDateIn = Calendar.getInstance();
+                        alreadyBookedDateIn.setTime(booking.getDateIn());
+                        Calendar alreadyBookedDateOut = Calendar.getInstance();
+                        alreadyBookedDateOut.setTime(booking.getDateOut());
 
-                        if ((bookingDateIn.before(calendarDateIn) || bookingDateIn.equals(calendarDateIn)) &&
-                                (bookingDateOut.after(calendarDateIn) || bookingDateOut.equals(calendarDateIn)) &&
-                                separateRoom == booking.getSeparate()) {
+                        if ((alreadyBookedDateIn.before(selectedDateIn) || alreadyBookedDateIn.equals(selectedDateIn)) &&
+                                (alreadyBookedDateOut.after(selectedDateIn) || alreadyBookedDateOut.equals(selectedDateIn))) {
 
-                            amountByDay += booking.getAmountOfAdults();
+                            if (!separateRoom && !booking.getSeparate()) {
+                                amountByDay += booking.getAmountOfAdults();
+                            } else {
+                                availability = false;
+                                break;
+                            }
 
                             if (amountByDay > room.getAmountOfAdults() || room.getType().compareTo("Economy family") == 0
                                     || room.getType().compareTo("Lux family") == 0) {
@@ -140,14 +145,13 @@ public class SearchRoomsServlet extends HttpServlet {
                             }
                         }
                     }
-                    i++;
                     amountByDay = amountOfAdults + amountOfChildren;
-                    calendarDateIn.add(Calendar.DAY_OF_MONTH, 1);
+                    selectedDateIn.add(Calendar.DAY_OF_MONTH, 1);
                 }
                 if (availability) {
                     availableRooms.add(room);
                 }
-                availability = false;
+                availability = true;
             }
         } catch (ParseException e) {
             e.printStackTrace();
