@@ -337,3 +337,16 @@ h2{
     color: black;
     transform: translateY(-7px);
 }
+
+.noRoomsFound{
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    font-size: 25px;
+    background: white;
+    text-align: center;
+    top: 320px;
+    left: 850px;
+    right: 40px;
+    padding: 20px;
+}

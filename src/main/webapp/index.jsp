@@ -33,7 +33,6 @@
                     <option class="comboboxRoomType" value="1">1</option>
                     <option class="comboboxRoomType" value="2">2</option>
                     <option class="comboboxRoomType" value="3">3</option>
-                    <option class="comboboxRoomType" value="4">4</option>
                 </select>
 
                 <label for="type">Children</label>
@@ -46,7 +45,7 @@
 
 
                 <label for="type">Room type</label>
-                <select name="roomType" id="type">
+                <select name="roomType" id="type" onchange="disableCheckbox()">
                     <option class="comboboxRoomType" value="allTypes">All types</option>
                     <option class="comboboxRoomType" value="Economy">Economy</option>
                     <option class="comboboxRoomType" value="Economy family">Economy family</option>
@@ -135,6 +134,18 @@
         var value = document.getElementById("startDate").value;
         endDate.setAttribute("min",getDatePlusOneDay(value));
         endDate.value = getDatePlusOneDay(value);
+    }
+
+    var roomType = document.getElementById("type");
+    var separateRoom = document.getElementById("separateRoom");
+    function disableCheckbox(){
+        var selectIndex=roomType.selectedIndex;
+        var selectValue=roomType.options[selectIndex].text;
+        if(selectValue == "Economy family" || selectValue == "Lux family"){
+            separateRoom.checked = "checked";
+            separateRoom.hidden = true;
+        }
+        else separateRoom.hidden = false;
     }
 
 </script>

@@ -33,7 +33,7 @@ public class SearchRoomsServlet extends HttpServlet {
         int amountOfChildren = Integer.parseInt(request.getParameter("amountOfChildren"));
         String type = request.getParameter("roomType");
         boolean separateRoom = false;
-        if (request.getParameter("separateRoom").compareTo("on") == 0) {
+        if (request.getParameter("separateRoom") != null) {
             separateRoom = true;
         }
 
@@ -158,7 +158,8 @@ public class SearchRoomsServlet extends HttpServlet {
         }
         if (availableRooms.size() == 0) {
 
-            ////////////////////////////////////////////////////////////////////
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/noRoomsFound.jsp");
+            dispatcher.forward(request, response);
 
         } else {
             //get unique rooms:

@@ -14,7 +14,7 @@
         <title>Rooms catalog </title>
     </head>
 </head>
-<body>
+<body style="background-image: url('images/more.jpg')">
 
 <jsp:include page="home.jsp"/>
 <div id="navbar">
