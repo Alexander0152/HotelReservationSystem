@@ -35,7 +35,7 @@
                 <td>${item.type}</td>
                 <td>${item.priceForOneNight}</td>
                 <td>
-                    <form action="bookRoom.jsp" method="get">
+                    <form action="BookFormServlet" method="get">
                         <input type="submit" value="Book" class="button">
                     </form>
                 </td>
