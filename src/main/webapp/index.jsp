@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page isELIgnored ="false" %>
+<%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-<%--    <script type="text/javascript" src="../javascript/jquery/search_jquery.ui.datepicker.js"></script>--%>
+    <%--    <script type="text/javascript" src="../javascript/jquery/search_jquery.ui.datepicker.js"></script>--%>
     <link rel="stylesheet" href="styleMain.css">
     <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
     <script src="webjars/momentjs/2.5.1/moment.js"></script>
@@ -54,7 +54,8 @@
                     <option class="comboboxRoomType" value="Vip">Vip</option>
                     <option class="comboboxRoomType" value="President">President</option>
                     <label>
-                        <input type="checkbox" id = "separateRoom" checked="checked" name="separateRoom" style="margin-bottom:15px; margin-left: 20px"> Separate room
+                        <input type="checkbox" id="separateRoom" checked="checked" name="separateRoom"
+                               style="margin-bottom:15px; margin-left: 20px"> Separate room
                     </label><br><br>
                 </select>
 
@@ -64,11 +65,12 @@
                 <label for="endDate"> Check out</label>
                 <input type="date" id="endDate" name="endDate"><br><br>
 
-                <button class="searchRoomsButton" input type="submit" style="vertical-align:middle"><span>Search rooms</span></button>
+                <button class="searchRoomsButton" input type="submit" style="vertical-align:middle">
+                    <span>Search rooms</span></button>
             </form>
-<%--            <form>--%>
-<%--                <a class="login-link" href="ViewRoomsServlet">Show rooms</a>--%>
-<%--            </form>--%>
+            <%--            <form>--%>
+            <%--                <a class="login-link" href="ViewRoomsServlet">Show rooms</a>--%>
+            <%--            </form>--%>
         </div>
     </div>
 </div>
@@ -78,27 +80,29 @@
     var modalLogin = document.getElementById('LoginModal');
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modalSignIn ) {
+    window.onclick = function (event) {
+        if (event.target == modalSignIn) {
             modalSignIn.style.display = "none";
         }
-        if (event.target == modalLogin ) {
+        if (event.target == modalLogin) {
             modalLogin.style.display = "none";
         }
     }
 
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function () {
+        myFunction()
+    };
     var navbar = document.getElementById("navbar");
     var sticky = navbar.offsetTop;
 
     var startDate = document.getElementById("startDate");
     startDate.value = getTodayDate();
-    startDate.setAttribute("min",startDate.value);
+    startDate.setAttribute("min", startDate.value);
 
     var endDate = document.getElementById("endDate");
     // endDate.value = getTodayDatePlusOneDay();
     endDate.value = getTodayDatePlusOneDay();
-    endDate.setAttribute("min",endDate.value);
+    endDate.setAttribute("min", endDate.value);
 
     function myFunction() {
         if (window.pageYOffset >= sticky) {
@@ -109,7 +113,7 @@
     }
 
     function getTodayDate() {
-        n =  new Date();
+        n = new Date();
         y = n.getFullYear();
         m = n.getMonth() + 1;
         d = n.getDate();
@@ -117,35 +121,36 @@
     }
 
     function getTodayDatePlusOneDay() {
-        n =  new Date();
+        n = new Date();
         n.setDate(n.getDate() + 1)
         y = n.getFullYear();
         m = n.getMonth() + 1;
         d = n.getDate();
         return y + "-" + m + "-" + d;
     }
+
     function getDatePlusOneDay(date) {
-        n =  new Date(date);
+        n = new Date(date);
         n.setDate(n.getDate() + 1);
         return moment(n).format('YYYY-MM-DD');
     }
 
     function getSelectedDate() {
         var value = document.getElementById("startDate").value;
-        endDate.setAttribute("min",getDatePlusOneDay(value));
+        endDate.setAttribute("min", getDatePlusOneDay(value));
         endDate.value = getDatePlusOneDay(value);
     }
 
     var roomType = document.getElementById("type");
     var separateRoom = document.getElementById("separateRoom");
-    function disableCheckbox(){
-        var selectIndex=roomType.selectedIndex;
-        var selectValue=roomType.options[selectIndex].text;
-        if(selectValue == "Economy family" || selectValue == "Lux family"){
+
+    function disableCheckbox() {
+        var selectIndex = roomType.selectedIndex;
+        var selectValue = roomType.options[selectIndex].text;
+        if (selectValue == "Economy family" || selectValue == "Lux family") {
             separateRoom.checked = "checked";
             separateRoom.hidden = true;
-        }
-        else separateRoom.hidden = false;
+        } else separateRoom.hidden = false;
     }
 
 </script>

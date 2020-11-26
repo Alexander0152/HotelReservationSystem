@@ -26,9 +26,10 @@
 <div id="SignInModal" class="modal">
 
     <%--    <form class="modal-content animate" action="/action_page.php" method="post">--%>
-    <form class="modal-content animate"  method="post">
+    <form class="modal-content animate" method="post">
         <div class="imgcontainer">
-            <span onclick="document.getElementById('SignInModal').style.display='none'" class="closeSigInButton" title="Close Modal">&times;</span>
+            <span onclick="document.getElementById('SignInModal').style.display='none'" class="closeSigInButton"
+                  title="Close Modal">&times;</span>
             <img src="images/loginPicture.png" style="position: relative" alt="Avatar" class="avatar">
         </div>
 
@@ -40,7 +41,8 @@
             <input type="password" placeholder="Enter Password" name="psw" required>
             <button type="submit" style="  background-color: orange; color: purple; padding: 14px 20px;
              margin: 8px 0; border: none; cursor: pointer; font-size: 17px; font-weight: bold;
-              width: 100%;">Sign in</button>
+              width: 100%;">Sign in
+            </button>
 
             <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -48,7 +50,9 @@
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                Cancel
+            </button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
@@ -59,7 +63,8 @@
 <div id="LoginModal" class="modal">
     <form class="modal-content animate" action="/action_page.php" method="post">
         <div class="imgcontainer">
-            <span onclick="document.getElementById('LoginModal').style.display='none'" class="closeLoginButton" title="Close Modal">&times;</span>
+            <span onclick="document.getElementById('LoginModal').style.display='none'" class="closeLoginButton"
+                  title="Close Modal">&times;</span>
         </div>
 
         <div class="container">
@@ -75,14 +80,16 @@
             <label for="psw-repeat" style="display: block; text-align: center;"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
 
-<%--            <label>--%>
-<%--                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me--%>
-<%--            </label>--%>
+            <%--            <label>--%>
+            <%--                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me--%>
+            <%--            </label>--%>
 
             <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('LoginModal').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('LoginModal').style.display='none'"
+                        class="cancelbtn">Cancel
+                </button>
                 <button type="submit" class="signupbtn">Sign Up</button>
             </div>
         </div>

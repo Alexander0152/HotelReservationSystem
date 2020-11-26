@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored ="false" %>
+<%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -21,7 +21,7 @@
             <td>Amount of Children</td>
             <td>Amount of rooms</td>
             <td>Type</td>
-            <td>USD/Night </td>
+            <td>USD/Night</td>
             <td></td>
         </tr>
         </thead>
