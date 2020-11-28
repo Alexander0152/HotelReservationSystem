@@ -35,7 +35,7 @@
 
         <div class="container">
             <label for="uname" style="display: block; text-align: center;"><b>Name</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
 
             <label for="psw" style="display: block; text-align: center;"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
@@ -72,13 +72,13 @@
             <p style="display: block; text-align: center;">Please fill in this form to create an account.</p>
             <hr>
             <label for="email" style="display: block; text-align: center;"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="text" id="email" placeholder="Enter Email" name="email" required>
 
             <label for="psw" style="display: block; text-align: center;"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" id="psw" placeholder="Enter Password" name="psw" required>
 
             <label for="psw-repeat" style="display: block; text-align: center;"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+            <input type="password" id="psw-repeat" placeholder="Repeat Password" name="psw-repeat" required>
 
             <%--            <label>--%>
             <%--                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me--%>

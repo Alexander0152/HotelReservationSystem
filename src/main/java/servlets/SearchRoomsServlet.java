@@ -29,13 +29,36 @@ public class SearchRoomsServlet extends HttpServlet {
         RoomService roomService = new RoomService();
         HttpSession session = request.getSession();
 
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar selectedDateIn = Calendar.getInstance();
+        Calendar selectedDateOut = Calendar.getInstance();
+
+        try {
+            selectedDateIn.setTime(df.parse(request.getParameter("startDate")));
+            selectedDateOut.setTime(df.parse(request.getParameter("endDate")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long amountOfNightsInMiliseconds = selectedDateOut.getTimeInMillis() - selectedDateIn.getTimeInMillis();
+        long amountOfNights = amountOfNightsInMiliseconds / (24 * 60 * 60 * 1000);
+        session.setAttribute("amountOfNights", amountOfNights);
+        int cost = Integer.parseInt(request.getParameter("amountOfAdults"));
+        session.setAttribute("cost", amountOfNights);
+
         int amountOfAdults = Integer.parseInt(request.getParameter("amountOfAdults"));
         int amountOfChildren = Integer.parseInt(request.getParameter("amountOfChildren"));
         String type = request.getParameter("roomType");
+
         boolean separateRoom = false;
         if (request.getParameter("separateRoom") != null) {
             separateRoom = true;
         }
+
+        session.setAttribute("amountOfAdults", amountOfAdults);
+        session.setAttribute("amountOfChildren", amountOfChildren);
+        session.setAttribute("roomType", type);
+        session.setAttribute("separateRoom", separateRoom);
 
         List<Room> rooms = null;
         List<Room> matchedRooms = new ArrayList<>();
@@ -91,70 +114,60 @@ public class SearchRoomsServlet extends HttpServlet {
 
         //check if they are already booked or free
         List<Room> availableRooms = new ArrayList<>();
-        try {
-            BookingService bookingService = new BookingService();
-            List<Booking> bookings = null;
+        BookingService bookingService = new BookingService();
+        List<Booking> bookings = null;
 
-            for (Room room : matchedRooms) {
+        for (Room room : matchedRooms) {
 
-                try {
-                    bookings = bookingService.getAllBookingsByRoomNumber(propertyFilepath, room.getNumber());
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+            try {
+                bookings = bookingService.getAllBookingsByRoomNumber(propertyFilepath, room.getNumber());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            ////
 
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar selectedDateIn = Calendar.getInstance();
-                Calendar selectedDateOut = Calendar.getInstance();
+            int amountByDay = amountOfAdults + amountOfChildren;
 
-                selectedDateIn.setTime(df.parse(request.getParameter("startDate")));
-                selectedDateOut.setTime(df.parse(request.getParameter("endDate")));
+            boolean availability = true;
+            while (selectedDateIn.before(selectedDateOut) || selectedDateIn.equals(selectedDateOut)) {
 
-                int amountByDay = amountOfAdults + amountOfChildren;
+                for (Booking booking : bookings) {
 
-                boolean availability = true;
-                while (selectedDateIn.before(selectedDateOut) || selectedDateIn.equals(selectedDateOut)) {
+                    Calendar alreadyBookedDateIn = Calendar.getInstance();
+                    alreadyBookedDateIn.setTime(booking.getDateIn());
+                    Calendar alreadyBookedDateOut = Calendar.getInstance();
+                    alreadyBookedDateOut.setTime(booking.getDateOut());
 
-                    for (Booking booking : bookings) {
+                    if ((alreadyBookedDateIn.before(selectedDateIn) || alreadyBookedDateIn.equals(selectedDateIn)) &&
+                            (alreadyBookedDateOut.after(selectedDateIn) || alreadyBookedDateOut.equals(selectedDateIn))) {
 
-                        Calendar alreadyBookedDateIn = Calendar.getInstance();
-                        alreadyBookedDateIn.setTime(booking.getDateIn());
-                        Calendar alreadyBookedDateOut = Calendar.getInstance();
-                        alreadyBookedDateOut.setTime(booking.getDateOut());
+                        if (!separateRoom && !booking.getSeparate()) {
+                            amountByDay += booking.getAmountOfAdults();
+                        } else {
+                            availability = false;
+                            break;
+                        }
 
-                        if ((alreadyBookedDateIn.before(selectedDateIn) || alreadyBookedDateIn.equals(selectedDateIn)) &&
-                                (alreadyBookedDateOut.after(selectedDateIn) || alreadyBookedDateOut.equals(selectedDateIn))) {
-
-                            if (!separateRoom && !booking.getSeparate()) {
-                                amountByDay += booking.getAmountOfAdults();
-                            } else {
-                                availability = false;
-                                break;
-                            }
-
-                            if (amountByDay > room.getAmountOfAdults() || room.getType().compareTo("Economy family") == 0
-                                    || room.getType().compareTo("Lux family") == 0) {
-                                availability = false;
-                                break;
-                            }
+                        if (amountByDay > room.getAmountOfAdults() || room.getType().compareTo("Economy family") == 0
+                                || room.getType().compareTo("Lux family") == 0) {
+                            availability = false;
+                            break;
                         }
                     }
-                    amountByDay = amountOfAdults + amountOfChildren;
-                    selectedDateIn.add(Calendar.DAY_OF_MONTH, 1);
                 }
-                if (availability) {
-                    availableRooms.add(room);
-                }
-                availability = true;
+                amountByDay = amountOfAdults + amountOfChildren;
+                selectedDateIn.add(Calendar.DAY_OF_MONTH, 1);
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
+            if (availability) {
+                availableRooms.add(room);
+            }
+            availability = true;
         }
         if (availableRooms.size() == 0) {
 
@@ -211,7 +224,6 @@ public class SearchRoomsServlet extends HttpServlet {
                         room.setImageSrc("images/Economy1.jpg");
                 }
             }
-
             request.setAttribute("rooms", uniqueRooms);
             RequestDispatcher dispatcher = null;
 
