@@ -38,6 +38,7 @@
                     <form action="BookFormServlet" method="get">
                         <input type="date" id="endDate" name="endDate" hidden>
                         <input type="hidden" id="priceForOneNight" name="priceForOneNight" value="${item.priceForOneNight}">
+                        <input type="hidden" id="roomNumber" name="roomNumber" value="${item.number}">
                         <input type="submit" value="Book" class="button">
                     </form>
                 </td>

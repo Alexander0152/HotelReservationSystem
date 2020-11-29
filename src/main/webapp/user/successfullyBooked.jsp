@@ -32,8 +32,8 @@
     <a class="active" href="index.jsp">Booking</a>
     <a href="javascript:void(0)">Contact</a>
 </div>
-<div class="container" style="background-color: rgba(255,255,255,0.9)">
-    <h5>The room booked successfully!</h5>
+<div class="container p-lg-5 text-center font-weight-bold text-success" style="background-color: rgba(255,255,255,0.9)">
+    <h3>The room booked successfully!</h3>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package businessLayer;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Booking {
     private int id;
@@ -11,6 +12,10 @@ public class Booking {
     private boolean separate;
     private int amountOfAdults;
     private int amountOfChildren;
+
+    private boolean breakfasts;
+    private boolean allinclusive;
+    private boolean champagne;
 
 
     public int getId() {
@@ -80,5 +85,29 @@ public class Booking {
 
     public void setAmountOfChildren(int amountOfChildren) {
         this.amountOfChildren = amountOfChildren;
+    }
+
+    public boolean getBreakfasts() {
+        return breakfasts;
+    }
+
+    public void setBreakfasts(boolean breakfasts) {
+        this.breakfasts = breakfasts;
+    }
+
+    public boolean getAllInclusive() {
+        return allinclusive;
+    }
+
+    public void setAllinclusive(boolean allinclusive) {
+        this.allinclusive = allinclusive;
+    }
+
+    public boolean getChampagne() {
+        return champagne;
+    }
+
+    public void setChampagne(boolean champagne) {
+        this.champagne = champagne;
     }
 }

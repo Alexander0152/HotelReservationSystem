@@ -40,6 +40,9 @@ public class SearchRoomsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        session.setAttribute("startDate",request.getParameter("startDate"));
+        session.setAttribute("endDate",request.getParameter("endDate"));
+
         long amountOfNightsInMiliseconds = selectedDateOut.getTimeInMillis() - selectedDateIn.getTimeInMillis();
         long amountOfNights = amountOfNightsInMiliseconds / (24 * 60 * 60 * 1000);
         session.setAttribute("amountOfNights", amountOfNights);
@@ -224,6 +227,7 @@ public class SearchRoomsServlet extends HttpServlet {
                         room.setImageSrc("images/Economy1.jpg");
                 }
             }
+
             request.setAttribute("rooms", uniqueRooms);
             RequestDispatcher dispatcher = null;
 

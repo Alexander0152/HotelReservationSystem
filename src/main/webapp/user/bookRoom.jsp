@@ -28,20 +28,20 @@
 <div class="container" style="background-color: rgba(255,255,255,0.9)">
     <div class="row">
         <div class="container w-50">
-            <form action="BookRoomServlet" method="post" class="container text-center" id="requirenments">
+            <form action="BookRoomServlet" method="post" class="container text-center" id="requirenments" onsubmit="return validateForm()">
                 <h5 class="font-weight-bold">Required</h5><br>
                 <form role="form">
                     <div class="form-group">
                         <label for="fname">First name</label>
-                        <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter first name">
                     </div>
                     <div class="form-group">
                         <label for="lname">Last name</label>
-                        <input type="text" class="form-control" id="lname" placeholder="Enter last name">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter last name">
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
-                        <select class="form-control" id="country" placeholder="Choose your country">
+                        <select class="form-control" id="country" name="country" placeholder="Choose your country">
                             <option value="Afganistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -292,47 +292,48 @@
                     </div>
                     <div class="form-group">
                         <label for="cityStateProvince">City/State/Province</label>
-                        <input type="text" class="form-control" id="cityStateProvince" placeholder="Enter your city">
+                        <input type="text" class="form-control" id="cityStateProvince" name="cityStateProvince"
+                               placeholder="Enter your city">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        <label for="userEmail">Email</label>
+                        <input type="email" class="form-control" id="userEmail" name="userEmail"
+                               placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="contactNumber">Contact number</label>
-                        <input type="tel" class="form-control" id="contactNumber"
+                        <input type="tel" class="form-control" id="contactNumber" name="contactNumber"
                                placeholder="Enter your contact number">
                     </div>
-                </form>
-            </form>
-        </div>
-        <div class="container w-50">
-            <form action="BookRoomServlet" method="post" class="container text-center" id="optionals">
-                <h5 class="font-weight-bold" style="text-align: center">Optional</h5><br>
-                <form role="form">
-                    <div class="form-check">
+                    <h5 class="font-weight-bold" style="text-align: center">Optional</h5><br>
+                    <div class="form-check text-left">
                         <label class="form-check-label" for="allInclusive">
-                        <input type="radio" class="form-check-input" id="allInclusive" name="optradio" value="allInclusive" onchange="getCost()">
+                            <input type="radio" class="form-check-input" id="allInclusive" name="meals"
+                                   value="allInclusive" onchange="getCost()">
                             All inclusive
                         </label>
                         <p class="text-muted">Cost: $80.00 per adult daily</p>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check text-left">
                         <label class="form-check-label" for="breakfasts">
-                        <input type="radio" class="form-check-input" id="breakfasts" name="optradio" value="breakfast" onchange="getCost()">
+                            <input type="radio" class="form-check-input" id="breakfasts" name="meals"
+                                   value="breakfasts" onchange="getCost()">
                             Breakfasts
                         </label>
                         <p class="text-muted">Cost: $25.00 per adult daily</p>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check text-left">
                         <label class="form-check-label" for="nothing">
-                        <input type="radio" class="form-check-input" id="nothing" name="optradio" value="nothing" checked onchange="getCost()">
+                            <input type="radio" class="form-check-input" id="nothing" name="meals" value="nothing"
+                                   checked onchange="getCost()">
                             Nothing
                         </label>
-                    </div><br>
+                    </div>
+                    <br>
                     <div class="form-check">
                         <label class="form-check-label" for="champagne">
-                            <input type="checkbox" class="form-check-input" id="champagne" name="option1" value="champagne" onchange="getCost()">
+                            <input type="checkbox" class="form-check-input" id="champagne" name="champagne"
+                                   value="champagne" onchange="getCost()">
                             Champagne and Chocolates in your room for your arrival.
                         </label>
                         <p class="text-muted">Cost: $49.50 each
@@ -341,15 +342,17 @@
                     </div>
                     <div class="form-check font-weight-bold w-50 text-info">
                         <label for="amountOfNights">Amount of nights</label>
-                        <input type="text" class="form-control text-primary font-weight-bold" id="amountOfNights" readonly>
+                        <input type="text" class="form-control text-primary font-weight-bold" id="amountOfNights"
+                               readonly>
                         </label>
                     </div>
                     <div class="form-check font-weight-bold w-50 text-info">
                         <label for="cost">Total cost(USD)</label>
                         <input type="text" class="form-control text-primary font-weight-bold" id="cost" readonly>
                         </label>
-                    </div><br>
-                    <button class="btn btn-lg btn-primary" onclick="submitForms()">Book</button>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-primary">Book</button>
                 </form>
             </form>
         </div>
@@ -366,30 +369,39 @@
     var amountOfNights = document.getElementById("amountOfNights");
     amountOfNights.value = ${amountOfNights};
 
-    function calculateCostWithoutOptionals(){
-        if(!${separateRoom}) {
-            return 0.3*${priceForOneNight}*(${amountOfAdults} + 0.5*${amountOfChildren});
-        }
-        else return ${priceForOneNight}*${amountOfNights};
+    function calculateCostWithoutOptionals() {
+        if (!${separateRoom}) {
+            return 0.3 * ${priceForOneNight} * (${amountOfAdults} +0.5 *${amountOfChildren});
+        } else return 1 * ${priceForOneNight} *${amountOfNights};
     }
+
     function getCost() {
-        if(allInclusive.checked){
-            cost.value = costWithoutOptions + 80*${amountOfNights}*(${amountOfAdults}+0.5*${amountOfChildren});
+        if (allInclusive.checked) {
+            cost.value = costWithoutOptions + 80 * ${amountOfNights} * (${amountOfAdults}+0.5 *${amountOfChildren});
         }
-        if(breakfasts.checked){
-            cost.value = costWithoutOptions + 25*${amountOfNights}*(${amountOfAdults}+0.5*${amountOfChildren});
+        if (breakfasts.checked) {
+            cost.value = costWithoutOptions + 25 * ${amountOfNights} * (${amountOfAdults}+0.5 *${amountOfChildren});
         }
-        if(nothing.checked){
+        if (nothing.checked) {
             cost.value = costWithoutOptions;
         }
-        if(champagne.checked){
+        if (champagne.checked) {
             cost.value = parseFloat(cost.value) + 49.50;
         }
     }
 
-    function submitForms(){
-        document.getElementById("requirenments").submit();
-        document.getElementById("optionals").submit();
+    function validateForm() {
+        var formFirstName = document.getElementById("fname");
+        var formLastName = document.getElementById("lname");
+        var formCity = document.getElementById("cityStateProvince");
+        var formEmail = document.getElementById("userEmail");
+        var formNumber = document.getElementById("contactNumber");
+        if (formFirstName.value == "" || formFirstName.value == null || formLastName.value == "" ||
+            formLastName.value == null || formCity.value == "" || formCity.value == null ||
+        formEmail.value == "" || formEmail.value == null || formNumber.value == "" || formNumber.value == null) {
+            alert("Not all fields selected!");
+            return false;
+        }
     }
 </script>
 </body>

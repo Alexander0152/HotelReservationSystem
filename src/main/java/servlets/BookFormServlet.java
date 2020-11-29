@@ -20,8 +20,12 @@ public class BookFormServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String costString = request.getParameter("priceForOneNight");
+        String roomNumberString = request.getParameter("roomNumber");
         double cost = Double.parseDouble(costString);
+        int roomNumber = Integer.parseInt(roomNumberString);
+
         session.setAttribute("priceForOneNight", cost);
+        session.setAttribute("roomNumber", roomNumber);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/bookRoom.jsp");
         dispatcher.forward(request, response);

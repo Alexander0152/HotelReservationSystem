@@ -22,4 +22,14 @@ public class BookingService {
         return dao.getAllBookingsByRoomNumber(number);
     }
 
+    public void addBooking(String filePath, Booking newBoooking) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        BookingDao dao = new BookingDao(filePath);
+        dao.addBooking(newBoooking);
+    }
+
+    public void addOptionalPreferences(String filePath, Booking newBoooking) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        BookingDao dao = new BookingDao(filePath);
+        dao.addOptionalPreferences(newBoooking);
+    }
+
 }
