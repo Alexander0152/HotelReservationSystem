@@ -198,7 +198,7 @@ public class BookingDao {
             lastBookingId++;
         }
 
-        String sql = "INSERT INTO optionals (id, breakfasts, all_inclusive, champagne, booking_number) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO optionals (id, breakfasts, all_inclusive, champagne, booking_number, total_cost) VALUES (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = con.prepareStatement(sql);
 
@@ -207,6 +207,7 @@ public class BookingDao {
         preparedStatement.setBoolean(3, booking.getAllInclusive());
         preparedStatement.setBoolean(4, booking.getChampagne());
         preparedStatement.setInt(5,lastBookingNumber);
+        preparedStatement.setDouble(6,booking.getTotalCost());
         preparedStatement.executeUpdate();
 
         con.close();

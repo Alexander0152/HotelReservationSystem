@@ -347,8 +347,8 @@
                         </label>
                     </div>
                     <div class="form-check font-weight-bold w-50 text-info">
-                        <label for="cost">Total cost(USD)</label>
-                        <input type="text" class="form-control text-primary font-weight-bold" id="cost" readonly>
+                        <label for="totalCost">Total cost(USD)</label>
+                        <input type="text" class="form-control text-primary font-weight-bold" id="totalCost" name="totalCost" readonly>
                         </label>
                     </div>
                     <br>
@@ -359,9 +359,9 @@
     </div>
 </div>
 <script>
-    var cost = document.getElementById("cost");
+    var totalCost = document.getElementById("totalCost");
     var costWithoutOptions = calculateCostWithoutOptionals();
-    cost.value = costWithoutOptions;
+    totalCost.value = costWithoutOptions;
     var allInclusive = document.getElementById("allInclusive");
     var breakfasts = document.getElementById("breakfasts");
     var nothing = document.getElementById("nothing");
@@ -377,16 +377,16 @@
 
     function getCost() {
         if (allInclusive.checked) {
-            cost.value = costWithoutOptions + 80 * ${amountOfNights} * (${amountOfAdults}+0.5 *${amountOfChildren});
+            totalCost.value = costWithoutOptions + 80 * ${amountOfNights} * (${amountOfAdults}+0.5 *${amountOfChildren});
         }
         if (breakfasts.checked) {
-            cost.value = costWithoutOptions + 25 * ${amountOfNights} * (${amountOfAdults}+0.5 *${amountOfChildren});
+            totalCost.value = costWithoutOptions + 25 * ${amountOfNights} * (${amountOfAdults}+0.5 *${amountOfChildren});
         }
         if (nothing.checked) {
-            cost.value = costWithoutOptions;
+            totalCost.value = costWithoutOptions;
         }
         if (champagne.checked) {
-            cost.value = parseFloat(cost.value) + 49.50;
+            totalCost.value = parseFloat(totalCost.value) + 49.50;
         }
     }
 

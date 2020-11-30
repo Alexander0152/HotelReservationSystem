@@ -13,28 +13,28 @@
 <body>
 <jsp:include page="../index.jsp"/>
 <div class="view_content">
-    <table>
+    <table class="table-bordered border-dark">
         <thead>
-        <tr>
-            <td>Room</td>
-            <td>Amount of Persons</td>
-            <td>Amount of Children</td>
-            <td>Amount of rooms</td>
-            <td>Type</td>
-            <td>USD/Night</td>
-            <td></td>
+        <tr class="border-dark">
+            <td class="border-dark">Room</td>
+            <td class="border-dark">Amount of Persons</td>
+            <td class="border-dark">Amount of Children</td>
+            <td class="border-dark">Amount of rooms</td>
+            <td class="border-dark">Type</td>
+            <td class="border-dark">USD/Night</td>
+            <td class="border-dark"></td>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="item" items="${rooms}">
             <tr>
-                <td><img src='${item.imageSrc}' width="150" height="110"></td>
-                <td>${item.amountOfAdults}</td>
-                <td>${item.amountOfChildren}</td>
-                <td>${item.amountOfRooms}</td>
-                <td>${item.type}</td>
-                <td>${item.priceForOneNight}</td>
-                <td>
+                <td class="border-dark"><img src='${item.imageSrc}' width="150" height="110"></td>
+                <td class="border-dark">${item.amountOfAdults}</td>
+                <td class="border-dark">${item.amountOfChildren}</td>
+                <td class="border-dark">${item.amountOfRooms}</td>
+                <td class="border-dark">${item.type}</td>
+                <td class="border-dark">${item.priceForOneNight}</td>
+                <td class="border-dark">
                     <form action="BookFormServlet" method="get">
                         <input type="date" id="endDate" name="endDate" hidden>
                         <input type="hidden" id="priceForOneNight" name="priceForOneNight" value="${item.priceForOneNight}">

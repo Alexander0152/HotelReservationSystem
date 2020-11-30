@@ -59,6 +59,7 @@ public class BookRoomServlet extends HttpServlet {
         if(request.getParameter("champagne") != null){
             newBooking.setChampagne(true);
         }
+        double totalCost = Double.parseDouble(request.getParameter("totalCost"));
 
         newBooking.setRoomNumber(roomNumber);
         newBooking.setCustomerName(customerFullName);
@@ -67,6 +68,7 @@ public class BookRoomServlet extends HttpServlet {
         newBooking.setSeparate(separateRoom);
         newBooking.setAmountOfAdults(amountOfAdults);
         newBooking.setAmountOfChildren(amountOfChildren);
+        newBooking.setTotalCost(totalCost);
 
         try {
             bookingService.addBooking(propertyFilepath, newBooking);

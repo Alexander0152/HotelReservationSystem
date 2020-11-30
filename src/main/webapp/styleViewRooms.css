@@ -156,8 +156,8 @@ img {
     position: absolute;
     top: 45px;
     right: 75px;
-    color: #f1f1f1;
-    font-size: 40px;
+    /*color: #f1f1f1;*/
+    /*font-size: 40px;*/
     font-weight: bold;
     transition: 0.3s;
 }
@@ -175,7 +175,7 @@ img {
     top: 350px;
     left: 805px;
     width: 900px;
-    height: 406px;
+    height: 426px;
     background-color: rgba(0, 0, 0, 0.77);
     color: white;
     padding-left: 20px;
@@ -189,7 +189,7 @@ img {
     top: 876px;
     left: 805px;
     width: 900px;
-    height: 389px;
+    height: 409px;
     background-color: rgba(0, 0, 0, 0.77);
     color: white;
     padding-left: 20px;
@@ -203,7 +203,7 @@ img {
     top: 1385px;
     left: 805px;
     width: 900px;
-    height: 410px;
+    height: 430px;
     background-color: rgba(0, 0, 0, 0.77);
     color: white;
     padding-left: 20px;
@@ -217,7 +217,7 @@ img {
     top: 1915px;
     left: 805px;
     width: 900px;
-    height: 400px;
+    height: 420px;
     background-color: rgba(0, 0, 0, 0.77);
     color: white;
     padding-left: 20px;

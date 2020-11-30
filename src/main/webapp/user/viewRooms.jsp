@@ -11,6 +11,18 @@
 <head>
     <head>
         <link rel="stylesheet" href="styleViewRooms.css">
+        <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+        <script src="webjars/momentjs/2.5.1/moment.js"></script>
+        <script src="webjars/bootstrap/4.5.3/js/bootstrap.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap.min.css.map">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-reboot.min.css.map">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap.min-jsf.css">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-reboot.min-jsf.css">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min-jsf.css">
         <title>Rooms catalog </title>
     </head>
 </head>
@@ -87,7 +99,7 @@
 
 <!-- The Modal -->
 <div id="myModal" class="imageModal">
-    <span class="close">&times;</span>
+    <span class="close" style="color: #f1f1f1; font-size: 40px;">&times;</span>
     <img class="imageModal-content" style="left: 455px; top: 200px;" id="img01">
     <div id="caption"></div>
 </div>

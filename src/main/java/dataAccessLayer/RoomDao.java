@@ -62,7 +62,6 @@ public class RoomDao {
             rooms.add(room);
         }
         con.close();
-//        return (ArrayList<Room>) rooms;
         return rooms;
     }
 

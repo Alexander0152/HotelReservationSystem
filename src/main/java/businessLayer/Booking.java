@@ -16,6 +16,7 @@ public class Booking {
     private boolean breakfasts;
     private boolean allinclusive;
     private boolean champagne;
+    private double totalCost;
 
 
     public int getId() {
@@ -109,5 +110,13 @@ public class Booking {
 
     public void setChampagne(boolean champagne) {
         this.champagne = champagne;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 }

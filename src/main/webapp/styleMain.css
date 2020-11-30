@@ -232,7 +232,7 @@ h2 {
     left: 70px;
     width: 700px;
     height: 460px;
-    background-color: rgba(0, 0, 0, 0.77);
+    background-color: rgba(245, 245, 220, 0.9);
 }
 
 .comboboxRoomType {
@@ -244,11 +244,11 @@ h2 {
 .searchRoomsButton {
     display: inline-block;
     border-radius: 4px;
-    background-color: darkorange;
+    /*background-color: royalblue;*/
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 22px;
+    font-size: 19px;
     padding: 10px;
     width: 120px;
     transition: all 0.5s;
@@ -329,7 +329,7 @@ h2 {
 }
 
 .view_content tr {
-    background: rgba(222, 184, 135, 0.9);
+    background: rgba(235, 207, 135, 0.9);
 
 }
 
