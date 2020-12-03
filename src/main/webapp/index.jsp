@@ -131,10 +131,7 @@
 
     function getTodayDate() {
         n = new Date();
-        y = n.getFullYear();
-        m = n.getMonth() + 1;
-        d = n.getDate();
-        return y + "-" + m + "-" + d;
+        return moment(n).format('YYYY-MM-DD');
     }
 
     function getTodayDatePlusOneDay() {

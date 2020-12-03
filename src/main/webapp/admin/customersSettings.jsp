@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min-jsf.css">
-    <title>Rooms settings</title>
+    <title>Customers settings</title>
 </head>
 <body style="background-image: url('images/gears.jpg')">
 <div id="navbarLogin">
@@ -28,38 +28,31 @@
     <p>Hotel and restaurant</p>
 </div>
 <div id="navbar">
-    <a href="CustomersSettingsServlet">Customers</a>
-    <a class="active" href="javascript:void(0)">Rooms</a>
+    <a class="active" href="ViewRoomsServlet">Customers</a>
+    <a href="BackToCustomersSettingsServlet">Rooms</a>
     <a href="AdminsSettingsServlet">Admins</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
     <div class="table-responsive">
-        <h5 class="font-weight-bold text-center">Rooms</h5><br>
+        <h5 class="font-weight-bold text-center">Customers</h5><br>
         <table class="table table-striped table-bordered text-center border-dark">
             <thead>
             <tr class="border-dark">
-                <td class="border-dark">Room number</td>
-                <td class="border-dark">Amount of Persons</td>
-                <td class="border-dark">Amount of Children</td>
-                <td class="border-dark">Amount of rooms</td>
-                <td class="border-dark">Type</td>
-                <td class="border-dark">USD/Night</td>
+                <td class="border-dark">Customer name</td>
+                <td class="border-dark">Customer email</td>
                 <td class="border-dark"></td>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="item" items="${allRooms}">
+            <c:forEach var="item" items="${customers}">
                 <tr>
-                    <td class="border-dark">${item.number}</td>
-                    <td class="border-dark">${item.amountOfAdults}</td>
-                    <td class="border-dark">${item.amountOfChildren}</td>
-                    <td class="border-dark">${item.amountOfRooms}</td>
-                    <td class="border-dark">${item.type}</td>
-                    <td class="border-dark">${item.priceForOneNight}</td>
+                    <td class="border-dark">${item.name}</td>
+                    <td class="border-dark">${item.email}</td>
                     <td class="border-dark">
-                        <form action="ShowInfoAboutRoomServlet" method="post">
-                            <input type="hidden" id="roomNumber" name="roomNumber" value="${item.number}">
-                            <button value="ShowInfo" class="button btn-primary btn-sm font-weight-bold">Show info</button>
+                        <form action="BookFormServlet" method="get">
+                            <input type="hidden" id="roomNumber" name="roomNumber" value="${item.email}">
+                            <button value="ShowInfo" class="button btn-primary btn-sm font-weight-bold">Show info
+                            </button>
                         </form>
                     </td>
                 </tr>

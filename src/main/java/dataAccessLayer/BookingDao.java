@@ -89,7 +89,9 @@ public class BookingDao {
         Connection con = DriverManager.getConnection(host, login, password);
 
         Statement st = con.createStatement();
-        String sql = String.format("SELECT* FROM reserved WHERE room_number = %d;", number);
+        String sql = String.format("SELECT o.*,r.*\n" + "FROM reserved r\n" +
+                "join optionals o on o.booking_number = r.booking_number \n" +
+                "where r.room_number = %d;", number);
         ResultSet rs = st.executeQuery(sql);
 
         while (rs.next()) {
@@ -103,13 +105,21 @@ public class BookingDao {
             booking.setSeparate(rs.getBoolean("separate_room"));
             booking.setAmountOfAdults(rs.getInt("amount_of_adults"));
             booking.setAmountOfChildren(rs.getInt("amount_of_children"));
+            booking.setBookingNumber(rs.getInt("booking_number"));
+
+            booking.setBreakfasts(rs.getBoolean("breakfasts"));
+            booking.setAllinclusive(rs.getBoolean("all_inclusive"));
+            booking.setChampagne(rs.getBoolean("champagne"));
+            booking.setTotalCost(rs.getDouble("total_cost"));
 
             bookings.add(booking);
         }
+
         con.close();
 
         return bookings;
     }
+
 
     public void addBooking(Booking booking) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
         String host = "";
@@ -138,7 +148,7 @@ public class BookingDao {
 
         int lastBookingNumber = 1;
         int lastBookingId = 1;
-        if(rs.next()){
+        if (rs.next()) {
             lastBookingNumber = rs.getInt("booking_number");
             lastBookingId = rs.getInt("id");
             lastBookingNumber++;
@@ -158,7 +168,7 @@ public class BookingDao {
         preparedStatement.setBoolean(6, booking.getSeparate());
         preparedStatement.setInt(7, booking.getAmountOfAdults());
         preparedStatement.setInt(8, booking.getAmountOfChildren());
-        preparedStatement.setInt(9,lastBookingNumber);
+        preparedStatement.setInt(9, lastBookingNumber);
         preparedStatement.executeUpdate();
 
         con.close();
@@ -191,7 +201,7 @@ public class BookingDao {
 
         int lastBookingNumber = 1;
         int lastBookingId = 1;
-        if(rs.next()){
+        if (rs.next()) {
             lastBookingNumber = rs.getInt("booking_number");
             lastBookingId = rs.getInt("id");
             lastBookingNumber++;
@@ -206,8 +216,8 @@ public class BookingDao {
         preparedStatement.setBoolean(2, booking.getBreakfasts());
         preparedStatement.setBoolean(3, booking.getAllInclusive());
         preparedStatement.setBoolean(4, booking.getChampagne());
-        preparedStatement.setInt(5,lastBookingNumber);
-        preparedStatement.setDouble(6,booking.getTotalCost());
+        preparedStatement.setInt(5, lastBookingNumber);
+        preparedStatement.setDouble(6, booking.getTotalCost());
         preparedStatement.executeUpdate();
 
         con.close();

@@ -133,7 +133,6 @@ public class SearchRoomsServlet extends HttpServlet {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            ////
 
             int amountByDay = amountOfAdults + amountOfChildren;
 

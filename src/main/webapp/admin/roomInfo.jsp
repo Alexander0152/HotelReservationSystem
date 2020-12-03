@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min-jsf.css">
-    <title>Rooms settings</title>
+    <title>Room info</title>
 </head>
 <body style="background-image: url('images/gears.jpg')">
 <div id="navbarLogin">
@@ -34,32 +34,39 @@
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
     <div class="table-responsive">
-        <h5 class="font-weight-bold text-center">Rooms</h5><br>
+        <h5 class="font-weight-bold text-center">Room № ${currentRoomNumber}</h5><br>
         <table class="table table-striped table-bordered text-center border-dark">
             <thead>
             <tr class="border-dark">
-                <td class="border-dark">Room number</td>
-                <td class="border-dark">Amount of Persons</td>
-                <td class="border-dark">Amount of Children</td>
-                <td class="border-dark">Amount of rooms</td>
-                <td class="border-dark">Type</td>
-                <td class="border-dark">USD/Night</td>
+                <td class="border-dark">Customer name</td>
+                <td class="border-dark">Date in</td>
+                <td class="border-dark">Date out</td>
+                <td class="border-dark">Separate</td>
+                <td class="border-dark">Amount of adults</td>
+                <td class="border-dark">Amount of children</td>
+                <td class="border-dark">Optionals</td>
+                <td class="border-dark">Total cost(USD)</td>
+                <td class="border-dark">Booking number</td>
                 <td class="border-dark"></td>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="item" items="${allRooms}">
+            <c:forEach var="item" items="${bookingList}">
                 <tr>
-                    <td class="border-dark">${item.number}</td>
+                    <td class="border-dark">${item.customerName}</td>
+                    <td class="border-dark">${item.dateIn}</td>
+                    <td class="border-dark">${item.dateOut}</td>
+                    <td class="border-dark">${item.separate}</td>
                     <td class="border-dark">${item.amountOfAdults}</td>
                     <td class="border-dark">${item.amountOfChildren}</td>
-                    <td class="border-dark">${item.amountOfRooms}</td>
-                    <td class="border-dark">${item.type}</td>
-                    <td class="border-dark">${item.priceForOneNight}</td>
+                    <td class="border-dark">${item.optionals}</td>
+                    <td class="border-dark">${item.totalCost}</td>
+                    <td class="border-dark">${item.bookingNumber}</td>
                     <td class="border-dark">
-                        <form action="ShowInfoAboutRoomServlet" method="post">
-                            <input type="hidden" id="roomNumber" name="roomNumber" value="${item.number}">
-                            <button value="ShowInfo" class="button btn-primary btn-sm font-weight-bold">Show info</button>
+                        <form action="BookFormServlet" method="post">
+                            <input type="hidden" id="roomNumber" name="roomNumber" value="${item.bookingNumber}">
+                            <button value="ShowInfo" class="button btn-primary btn-sm font-weight-bold">Cancel booking
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -68,5 +75,13 @@
         </table>
     </div>
 </div>
+<script>
+    var optionals = document.getElementById("optionals");
+    function getOptionals(allInclusive, breakfasts, champagne) {
+        if(allInclusive == true){
+            var allInclusive = "All inclusive";
+        }
+    }
+</script>
 </body>
 </html>

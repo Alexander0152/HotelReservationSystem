@@ -12,11 +12,14 @@ public class Booking {
     private boolean separate;
     private int amountOfAdults;
     private int amountOfChildren;
+    private int bookingNumber;
 
     private boolean breakfasts;
     private boolean allinclusive;
     private boolean champagne;
     private double totalCost;
+
+    private String optionals;
 
 
     public int getId() {
@@ -88,6 +91,14 @@ public class Booking {
         this.amountOfChildren = amountOfChildren;
     }
 
+    public int getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public void setBookingNumber(int bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
+
     public boolean getBreakfasts() {
         return breakfasts;
     }
@@ -118,5 +129,13 @@ public class Booking {
 
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public String getOptionals() {
+        return optionals;
+    }
+
+    public void setOptionals(String optionals) {
+        this.optionals = optionals;
     }
 }

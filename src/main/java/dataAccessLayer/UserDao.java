@@ -66,6 +66,55 @@ public class UserDao {
         return user;
     }
 
+    public List<User> getUserByStatus(UserStatus status) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+
+        String host = "";
+        String login = "";
+        String password = "";
+        FileInputStream fis;
+        Properties property = new Properties();
+
+        try {
+            fis = new FileInputStream(connectionFileName);
+            property.load(fis);
+
+            host = property.getProperty("db.host");
+            login = property.getProperty("db.login");
+            password = property.getProperty("db.password");
+
+        } catch (IOException e) {
+            System.err.println("Error: File doesn't exist!");
+        }
+
+        Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        Connection con = DriverManager.getConnection(host, login, password);
+
+        Statement st = con.createStatement();
+        String lowerCaseStatus = status.toString().toLowerCase();
+        String sql = String.format("SELECT* FROM users WHERE status = '%s';", lowerCaseStatus);
+        ResultSet rs = st.executeQuery(sql);
+
+        List<User> users = new ArrayList<>();
+        while(rs.next()){
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setName(rs.getString("name"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+            String userstatus=rs.getString("status");
+            switch (userstatus){
+                case "admin": { user.setStatus(UserStatus.ADMIN); break; }
+                case "user": { user.setStatus(UserStatus.USER); break; }
+                case "banned":{ user.setStatus(UserStatus.BANNED); break;}
+                default: { break; }
+            }
+            users.add(user);
+        }
+        con.close();
+
+        return users;
+    }
+
     public void addUser(User user) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
         String host = "";
         String login = "";
