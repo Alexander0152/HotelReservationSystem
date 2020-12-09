@@ -1,7 +1,5 @@
 package dataAccessLayer;
 
-import businessLayer.Booking;
-import businessLayer.Room;
 import businessLayer.User;
 import businessLayer.UserStatus;
 

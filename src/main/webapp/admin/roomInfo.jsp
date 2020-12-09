@@ -63,9 +63,21 @@
                     <td class="border-dark">${item.totalCost}</td>
                     <td class="border-dark">${item.bookingNumber}</td>
                     <td class="border-dark">
-                        <form action="BookFormServlet" method="post">
+                        <form action="CancelBookingServlet" method="post">
                             <input type="hidden" id="roomNumber" name="roomNumber" value="${item.bookingNumber}">
-                            <button value="ShowInfo" class="button btn-primary btn-sm font-weight-bold">Cancel booking
+                            <button value="cancelBooking" class="button btn-info btn-sm font-weight-bold">Cancel
+                                booking
+                            </button>
+                        </form>
+                        <form action="BanCustomerServlet" method="post">
+                            <button value="banCustomer" class="button btn-info btn-sm font-weight-bold">Ban
+                                customer
+                            </button>
+                        </form>
+                            <form action="ShowCustomerInfoServlet" method="post">
+                                <input type="hidden" id="customerName" name="customerName" value="${item.customerName}">
+                            <button value="customerInfo" class="button btn-info btn-sm font-weight-bold">Show
+                                customer info
                             </button>
                         </form>
                     </td>
@@ -77,8 +89,9 @@
 </div>
 <script>
     var optionals = document.getElementById("optionals");
+
     function getOptionals(allInclusive, breakfasts, champagne) {
-        if(allInclusive == true){
+        if (allInclusive == true) {
             var allInclusive = "All inclusive";
         }
     }

@@ -1,7 +1,9 @@
 package servlets;
 
 import businessLayer.Booking;
+import businessLayer.Customer;
 import serviceLayer.BookingService;
+import serviceLayer.CustomerService;
 import serviceLayer.RoomService;
 
 import javax.servlet.RequestDispatcher;
@@ -70,9 +72,26 @@ public class BookRoomServlet extends HttpServlet {
         newBooking.setAmountOfChildren(amountOfChildren);
         newBooking.setTotalCost(totalCost);
 
+        String customeCountry = request.getParameter("country");
+        String customerCity = request.getParameter("cityStateProvince");
+        String customerEmail = request.getParameter("userEmail");
+        String customerContactNumber = request.getParameter("contactNumber");
+
+        Customer customer = new Customer();
+
+        customer.setFirstName(customerFirstName);
+        customer.setLastName(customerLastName);
+        customer.setCountry(customeCountry);
+        customer.setCity(customerCity);
+        customer.setEmail(customerEmail);
+        customer.setContactNumber(customerContactNumber);
+
+        CustomerService customerService = new CustomerService();
+
         try {
             bookingService.addBooking(propertyFilepath, newBooking);
             bookingService.addOptionalPreferences(propertyFilepath, newBooking);
+            customerService.addCustomer(propertyFilepath, customer);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

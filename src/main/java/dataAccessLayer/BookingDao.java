@@ -116,7 +116,6 @@ public class BookingDao {
         }
 
         con.close();
-
         return bookings;
     }
 
