@@ -2,9 +2,12 @@ package servlets;
 
 import businessLayer.Booking;
 import businessLayer.Customer;
+import businessLayer.User;
+import businessLayer.UserStatus;
 import serviceLayer.BookingService;
 import serviceLayer.CustomerService;
 import serviceLayer.RoomService;
+import serviceLayer.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,6 +33,31 @@ public class BookRoomServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String propertyFilepath = "D:\\LABS_5_SEM\\OS_i_sist_progr\\CourseWork\\CourseWork\\resources\\connectionInfo.txt";
+
+        //first check that user is not banned
+        String email = request.getParameter("userEmail");
+        UserService userService = new UserService();
+        User user = null;
+        try {
+            user = userService.getUserByEmail(propertyFilepath, email);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        String errorMessage = new String();
+
+        if (user.getStatus() == UserStatus.BANNED) {
+            errorMessage = "ban";
+            request.setAttribute("enterSystemErrorMessage", errorMessage);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
+        }
 
         BookingService bookingService = new BookingService();
 

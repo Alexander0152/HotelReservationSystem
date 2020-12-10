@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <%--    <script type="text/javascript" src="../javascript/jquery/search_jquery.ui.datepicker.js"></script>--%>
     <link rel="stylesheet" href="styleMain.css">
     <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
     <script src="webjars/momentjs/2.5.1/moment.js"></script>
@@ -163,7 +162,22 @@
             separateRoom.hidden = true;
         } else separateRoom.hidden = false;
     }
+    onload = function checkLogin() {
+        var loginFlag = '${enterSystemErrorMessage}';
 
+        if ( loginFlag.localeCompare("suchUserAlreadyExist") == 0){
+            document.getElementById('UserAlreadyExistModal').style.display = 'block';
+        }
+        else if(loginFlag.localeCompare("wrongSignInPassword") == 0){
+            document.getElementById('wrongSignInPasswordModal').style.display = 'block';
+        }
+        else if(loginFlag.localeCompare("noSuchUser") == 0){
+            document.getElementById('NosuchUserModal').style.display = 'block';
+        }
+        else if(loginFlag.localeCompare("ban") == 0){
+            document.getElementById('banModal').style.display = 'block';
+        }
+    }
 </script>
 </body>
 </html>

@@ -20,7 +20,8 @@
 </head>
 <body style="background-image: url('images/gears.jpg')">
 <div id="navbarLogin">
-    <a style="display: block" style="width:auto;">Admin</a>
+    <a style="text-align: center;">Admin</a>
+    <a href="ExitAdminServlet" style="width:auto;">Exit</a>
 </div>
 
 <div class="header">
@@ -28,14 +29,15 @@
     <p>Hotel and restaurant</p>
 </div>
 <div id="navbar">
-    <a href="CustomersSettingsServlet">Customers</a>
+    <a href="UsersSettingsServlet">Users</a>
     <a class="active" href="javascript:void(0)">Rooms</a>
     <a href="AdminsSettingsServlet">Admins</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
     <div class="table-responsive">
         <h5 class="font-weight-bold text-center">Room № ${currentRoomNumber}</h5><br>
-        <table class="table table-striped table-bordered text-center border-dark">
+        <input class="form-control" type="text" placeholder="Enter customer name" id="search-text" onkeyup="tableSearch()">
+        <table class="table table-striped table-bordered text-center border-dark" id="info-table">
             <thead>
             <tr class="border-dark">
                 <td class="border-dark">Customer name</td>
@@ -93,6 +95,25 @@
     function getOptionals(allInclusive, breakfasts, champagne) {
         if (allInclusive == true) {
             var allInclusive = "All inclusive";
+        }
+    }
+    function tableSearch() {
+        var phrase = document.getElementById('search-text');
+        var table = document.getElementById('info-table');
+        var regPhrase = new RegExp(phrase.value, 'i');
+        var flag = false;
+        for (var i = 1; i < table.rows.length; i++) {
+            flag = false;
+            for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+                if (flag) break;
+            }
+            if (flag) {
+                table.rows[i].style.display = "";
+            } else {
+                table.rows[i].style.display = "none";
+            }
+
         }
     }
 </script>

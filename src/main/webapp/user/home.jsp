@@ -24,29 +24,30 @@
 </div>
 
 <div id="SignInModal" class="modal">
-    <form class="modal-content animate" method="post">
+    <form class="modal-content animate" action="SignInServlet" method="post">
         <div class="imgcontainer">
             <span onclick="document.getElementById('SignInModal').style.display='none'" class="closeSigInButton"
                   title="Close Modal">&times;</span>
             <img src="images/loginPicture.png" style="position: relative" alt="Avatar" class="avatar">
         </div>
         <div class="container text-center">
-            <label for="uname" style="display: block; text-align: center;"><b>Name</b></label>
-            <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
-            <label for="psw" style="display: block; text-align: center;"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit" style="background-color: #3cb34c; color: white; padding: 14px 20px;
-             margin: 8px 0; border: none; cursor: pointer; font-size: 17px; font-weight: bold;
-              width: 30%;">Sign in
+            <label for="signInEmail" style="display: block; text-align: center;"><b>Email</b></label>
+            <input type="email" class="form-control p-4" placeholder="Enter Email" id="signInEmail" name="signInEmail"
+                   required>
+            <label for="signInPassword" style="display: block; text-align: center;"><b>Password</b></label>
+            <input type="password" class="form-control p-4" placeholder="Enter Password" id="signInPassword"
+                   name="signInPassword" required>
+            <button type="submit" class="btn btn-success btn-lg">Sign in
+            </button>
+            <br><br>
+            <p class="text-info text-left">Don't have an account? You can create it now:</p>
+            <button onclick="switchToLogiModal()" class="btn btn-info">Create an account
             </button>
         </div>
     </form>
 </div>
-
-<%--<button onclick="document.getElementById('LoginModal').style.display='block'" style="width:auto;">Sign Up</button>--%>
-
 <div id="LoginModal" class="modal">
-    <form class="modal-content animate" action="LoginServlet" method="post">
+    <form class="modal-content animate" action="LoginServlet" method="post" onsubmit="return checkPasswords()">
         <div class="imgcontainer">
             <span onclick="document.getElementById('LoginModal').style.display='none'" class="closeLoginButton"
                   title="Close Modal">&times;</span>
@@ -55,20 +56,90 @@
             <h1 style="display: block; text-align: center;">Login</h1>
             <p style="display: block; text-align: center;">Please fill in this form to create an account.</p>
             <hr>
+            <label for="loginName" style="display: block; text-align: center;"><b>Name</b></label>
+            <input type="text" id="loginName" placeholder="Enter name" name="loginName" required>
+
             <label for="loginEmail" style="display: block; text-align: center;"><b>Email</b></label>
             <input type="text" id="loginEmail" placeholder="Enter Email" name="loginEmail" required>
 
             <label for="loginPassword" style="display: block; text-align: center;"><b>Password</b></label>
             <input type="password" id="loginPassword" placeholder="Enter Password" name="loginPassword" required>
 
-            <label for="psw-repeat" style="display: block; text-align: center;"><b>Repeat Password</b></label>
-            <input type="password" id="psw-repeat" placeholder="Repeat Password" name="psw-repeat" required>
+            <label for="repeateLoginPassword" style="display: block; text-align: center;"><b>Repeat Password</b></label>
+            <input type="password" id="repeateLoginPassword" placeholder="Repeat Password" name="repeateLoginPassword"
+                   required>
 
-            <button type="submit" style="background-color: #3cb34c; color: white; padding: 14px;
-             margin: 8px 0; border: none; cursor: pointer; font-size: 17px; font-weight: bold; width: 30%">Login
+            <button type="submit" class="btn btn-success btn-lg">Login
             </button>
         </div>
     </form>
 </div>
+<div id="UserAlreadyExistModal" class="modal">
+    <form class="modal-content animate">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('UserAlreadyExistModal').style.display='none'" class="closeLoginButton"
+                  title="Close Modal">&times;</span>
+        </div>
+        <div class="container text-center">
+            <h1 style="display: block; text-align: center;">Error</h1>
+            <p style="display: block; text-align: center;">Such user already exist.</p>
+            <hr>
+        </div>
+    </form>
+</div>
+<div id="NosuchUserModal" class="modal">
+    <form class="modal-content animate">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('NosuchUserModal').style.display='none'" class="closeLoginButton"
+                  title="Close Modal">&times;</span>
+        </div>
+        <div class="container text-center">
+            <h1 style="display: block; text-align: center;">Error</h1>
+            <p style="display: block; text-align: center;">No such user, please try again or create an account!</p>
+            <hr>
+        </div>
+    </form>
+</div>
+<div id="wrongSignInPasswordModal" class="modal">
+    <form class="modal-content animate">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('wrongSignInPasswordModal').style.display='none'" class="closeLoginButton"
+                  title="Close Modal">&times;</span>
+        </div>
+        <div class="container text-center">
+            <h1 style="display: block; text-align: center;">Error</h1>
+            <p style="display: block; text-align: center;">Wrong password, please try again!</p>
+            <hr>
+        </div>
+    </form>
+</div>
+<div id="banModal" class="modal">
+    <form class="modal-content animate">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('banModal').style.display='none'" class="closeLoginButton"
+                  title="Close Modal">&times;</span>
+        </div>
+        <div class="container text-center">
+            <h1 style="display: block; text-align: center;">Error</h1>
+            <p style="display: block; text-align: center;">You are banned on this site and can't book rooms!</p>
+            <hr>
+        </div>
+    </form>
+</div>
+<script>
+    function switchToLogiModal() {
+        document.getElementById('LoginModal').style.display = 'block';
+        document.getElementById('SignInModal').style.display = 'none'
+    }
+
+    function checkPasswords() {
+        var psw1 = document.getElementById('loginPassword');
+        var psw2 = document.getElementById('repeateLoginPassword');
+        if (psw1.value != psw2.value) {
+            alert("Passwords dont't match!");
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

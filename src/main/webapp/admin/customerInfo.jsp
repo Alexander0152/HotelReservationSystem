@@ -20,7 +20,8 @@
 </head>
 <body style="background-image: url('images/gears.jpg')">
 <div id="navbarLogin">
-    <a style="display: block" style="width:auto;">Admin</a>
+    <a style="text-align: center;">Admin</a>
+    <a href="ExitAdminServlet" style="width:auto;">Exit</a>
 </div>
 
 <div class="header">
@@ -28,7 +29,7 @@
     <p>Hotel and restaurant</p>
 </div>
 <div id="navbar">
-    <a href="CustomersSettingsServlet">Customers</a>
+    <a href="UsersSettingsServlet">Users</a>
     <a class="active" href="javascript:void(0)">Rooms</a>
     <a href="AdminsSettingsServlet">Admins</a>
 </div>

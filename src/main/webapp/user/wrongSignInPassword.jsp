@@ -31,7 +31,7 @@
     <a href="javascript:void(0)">Contact</a>
 </div>
 <div class="container text-center font-weight-bold text-danger" style="background-color: rgba(255,255,255,0.9)">
-    <h3 class>You are banned on this site and can't book rooms!</h3>
+    <h3 class>Wrong password, please try again!</h3>
 </div>
 </body>
 </html>

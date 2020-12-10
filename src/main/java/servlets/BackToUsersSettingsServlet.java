@@ -15,8 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/BackToCustomersSettingsServlet")
-public class BackToCustomersSettingsServlet extends HttpServlet {
+@WebServlet("/BackToUsersSettingsServlet")
+public class BackToUsersSettingsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

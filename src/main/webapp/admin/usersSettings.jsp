@@ -20,7 +20,8 @@
 </head>
 <body style="background-image: url('images/gears.jpg')">
 <div id="navbarLogin">
-    <a style="display: block" style="width:auto;">Admin</a>
+    <a style="text-align: center;">Admin</a>
+    <a href="ExitAdminServlet" style="width:auto;">Exit</a>
 </div>
 
 <div class="header">
@@ -28,8 +29,8 @@
     <p>Hotel and restaurant</p>
 </div>
 <div id="navbar">
-    <a class="active" href="ViewRoomsServlet">Customers</a>
-    <a href="BackToCustomersSettingsServlet">Rooms</a>
+    <a class="active" href="ViewRoomsServlet">Users</a>
+    <a href="BackToUsersSettingsServlet">Rooms</a>
     <a href="AdminsSettingsServlet">Admins</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
@@ -38,9 +39,8 @@
         <table class="table table-striped table-bordered text-center border-dark">
             <thead>
             <tr class="border-dark">
-                <td class="border-dark">Customer name</td>
-                <td class="border-dark">Customer email</td>
-                <td class="border-dark"></td>
+                <td class="border-dark">User name</td>
+                <td class="border-dark">User email</td>
             </tr>
             </thead>
             <tbody>
@@ -48,12 +48,6 @@
                 <tr>
                     <td class="border-dark">${item.name}</td>
                     <td class="border-dark">${item.email}</td>
-                    <td class="border-dark">
-                        <form action="BookFormServlet" method="get">
-                            <input type="hidden" id="roomNumber" name="roomNumber" value="${item.email}">
-                            <button value="ShowInfo" class="button btn-primary btn-sm font-weight-bold">Show info
-                            </button>
-                        </form>
                     </td>
                 </tr>
             </c:forEach>

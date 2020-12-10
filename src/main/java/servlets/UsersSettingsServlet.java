@@ -19,8 +19,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/CustomersSettingsServlet")
-public class CustomersSettingsServlet extends HttpServlet {
+@WebServlet("/UsersSettingsServlet")
+public class UsersSettingsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class CustomersSettingsServlet extends HttpServlet {
 
         request.setAttribute("customers", users);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/customersSettings.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/usersSettings.jsp");
         dispatcher.forward(request, response);
     }
 }
