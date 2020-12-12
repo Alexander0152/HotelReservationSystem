@@ -135,8 +135,8 @@ public class UserDao {
         Connection con = DriverManager.getConnection(host, login, password);
 
         Statement st = con.createStatement();
-        String getLastBookingNumber = ("SELECT * FROM users ORDER BY id DESC LIMIT 1;");
-        ResultSet rs = st.executeQuery(getLastBookingNumber);
+        String getLastUserId = ("SELECT * FROM users ORDER BY id DESC LIMIT 1;");
+        ResultSet rs = st.executeQuery(getLastUserId);
 
         int lastUserId = 1;
         if(rs.next()){
@@ -155,6 +155,36 @@ public class UserDao {
         preparedStatement.setString(5, user.getStatus().toString().toLowerCase());
         preparedStatement.executeUpdate();
 
+        con.close();
+    }
+
+    public void changeUserStatus(String userName, UserStatus newStatus) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+        String host = "";
+        String login = "";
+        String password = "";
+        FileInputStream fis;
+        Properties property = new Properties();
+        try {
+            fis = new FileInputStream(connectionFileName);
+            property.load(fis);
+
+            host = property.getProperty("db.host");
+            login = property.getProperty("db.login");
+            password = property.getProperty("db.password");
+
+        } catch (IOException e) {
+            System.err.println("Error: File doesn't exist!");
+        }
+
+        Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        Connection con = DriverManager.getConnection(host, login, password);
+
+        String sql = String.format("UPDATE users SET status = '%s' WHERE name = '%s';",
+                newStatus.toString().toLowerCase(), userName);
+
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+        preparedStatement.executeUpdate();
         con.close();
     }
 }

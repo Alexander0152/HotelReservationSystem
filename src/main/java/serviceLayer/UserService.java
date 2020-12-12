@@ -1,9 +1,7 @@
 package serviceLayer;
 
-import businessLayer.Booking;
 import businessLayer.User;
 import businessLayer.UserStatus;
-import dataAccessLayer.BookingDao;
 import dataAccessLayer.UserDao;
 
 import java.sql.SQLException;
@@ -24,5 +22,10 @@ public class UserService {
     public void addUser(String filePath, User user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         UserDao dao = new UserDao(filePath);
         dao.addUser(user);
+    }
+
+    public void changeUserStatus(String filePath, String userName, UserStatus newStatus) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        UserDao dao = new UserDao(filePath);
+        dao.changeUserStatus(userName, newStatus);
     }
 }

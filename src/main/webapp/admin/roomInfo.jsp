@@ -66,14 +66,10 @@
                     <td class="border-dark">${item.bookingNumber}</td>
                     <td class="border-dark">
                         <form action="CancelBookingServlet" method="post">
-                            <input type="hidden" id="roomNumber" name="roomNumber" value="${item.bookingNumber}">
+                            <input type="hidden" id="bookingNumber" name="bookingNumber" value="${item.bookingNumber}">
+                            <input type="hidden" id="roomNumber" name="roomNumber" value="${currentRoomNumber}">
                             <button value="cancelBooking" class="button btn-info btn-sm font-weight-bold">Cancel
                                 booking
-                            </button>
-                        </form>
-                        <form action="BanCustomerServlet" method="post">
-                            <button value="banCustomer" class="button btn-info btn-sm font-weight-bold">Ban
-                                customer
                             </button>
                         </form>
                             <form action="ShowCustomerInfoServlet" method="post">

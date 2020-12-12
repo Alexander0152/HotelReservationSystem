@@ -221,4 +221,34 @@ public class BookingDao {
 
         con.close();
     }
+
+    public void removeBooking(int bookingNumber) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+        String host = "";
+        String login = "";
+        String password = "";
+        FileInputStream fis;
+        Properties property = new Properties();
+        try {
+            fis = new FileInputStream(connectionFileName);
+            property.load(fis);
+
+            host = property.getProperty("db.host");
+            login = property.getProperty("db.login");
+            password = property.getProperty("db.password");
+
+        } catch (IOException e) {
+            System.err.println("Error: File doesn't exist!");
+        }
+
+        Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        Connection con = DriverManager.getConnection(host, login, password);
+
+        String delete = String.format("DELETE r, o FROM reserved r JOIN optionals o ON r.booking_number = o.booking_number " +
+                "WHERE r.booking_number = '%d';", bookingNumber);
+        //ResultSet rs = st.executeQuery(delete);
+        PreparedStatement preparedStatement = con.prepareStatement(delete);
+        preparedStatement.executeUpdate();
+
+        con.close();
+    }
 }

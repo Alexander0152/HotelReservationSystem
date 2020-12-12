@@ -32,4 +32,9 @@ public class BookingService {
         dao.addOptionalPreferences(newBoooking);
     }
 
+    public void removeBooking(String filePath, int bookingNumber) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        BookingDao dao = new BookingDao(filePath);
+        dao.removeBooking(bookingNumber);
+    }
+
 }
