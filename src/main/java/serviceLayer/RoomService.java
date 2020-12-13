@@ -18,13 +18,4 @@ public class RoomService {
         RoomDao dao = new RoomDao(filePath);
         return dao.getAllRoomsByType(type);
     }
-
-//    public List<Room> finedRooomsByСriterias(List<Room> list) {
-//        List<Room> roomList = new ArrayList<>();
-//        for(Room book: list){
-//
-//
-//        }
-//        return roomList;
-//    }
 }

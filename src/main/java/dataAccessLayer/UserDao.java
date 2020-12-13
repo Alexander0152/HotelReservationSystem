@@ -56,6 +56,7 @@ public class UserDao {
                 case "admin": { user.setStatus(UserStatus.ADMIN); break; }
                 case "user": { user.setStatus(UserStatus.USER); break; }
                 case "banned":{ user.setStatus(UserStatus.BANNED); break;}
+                case "employee":{ user.setStatus(UserStatus.EMPLOYEE); break;}
                 default: { break; }
             }
         }
@@ -158,7 +159,7 @@ public class UserDao {
         con.close();
     }
 
-    public void changeUserStatus(String userName, UserStatus newStatus) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+    public void changeUserStatus(String userEmail, UserStatus newStatus) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
         String host = "";
         String login = "";
         String password = "";
@@ -179,8 +180,8 @@ public class UserDao {
         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         Connection con = DriverManager.getConnection(host, login, password);
 
-        String sql = String.format("UPDATE users SET status = '%s' WHERE name = '%s';",
-                newStatus.toString().toLowerCase(), userName);
+        String sql = String.format("UPDATE users SET status = '%s' WHERE email = '%s';",
+                newStatus.toString().toLowerCase(), userEmail);
 
         PreparedStatement preparedStatement = con.prepareStatement(sql);
 

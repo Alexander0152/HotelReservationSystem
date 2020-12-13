@@ -1,13 +1,7 @@
 package servlets;
 
-import businessLayer.Booking;
-import businessLayer.Customer;
-import businessLayer.User;
-import businessLayer.UserStatus;
-import serviceLayer.BookingService;
-import serviceLayer.CustomerService;
-import serviceLayer.RoomService;
-import serviceLayer.UserService;
+import businessLayer.*;
+import serviceLayer.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -120,6 +114,29 @@ public class BookRoomServlet extends HttpServlet {
             bookingService.addBooking(propertyFilepath, newBooking);
             bookingService.addOptionalPreferences(propertyFilepath, newBooking);
             customerService.addCustomer(propertyFilepath, customer);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        //add to history
+        HistoryService historyService = new HistoryService();
+        History history = new History();
+
+        history.setRoomNumber(roomNumber);
+        history.setCustomerName(customerFullName);
+        history.setCustomerEmail(email);
+        history.setContactNumber(customerContactNumber);
+        history.setDateIn(dateIn);
+        history.setDateOut(dateOut);
+
+        try {
+            historyService.addBookingToHistory(propertyFilepath, history);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

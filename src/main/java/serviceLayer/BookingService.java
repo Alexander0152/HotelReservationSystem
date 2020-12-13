@@ -37,4 +37,9 @@ public class BookingService {
         dao.removeBooking(bookingNumber);
     }
 
+    public List<Booking> getAllBookingsByCustomerName(String filePath, String name) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        BookingDao dao = new BookingDao(filePath);
+        return dao.getAllBookingsByCustomerName(name);
+    }
+
 }

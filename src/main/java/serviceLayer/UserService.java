@@ -24,8 +24,8 @@ public class UserService {
         dao.addUser(user);
     }
 
-    public void changeUserStatus(String filePath, String userName, UserStatus newStatus) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public void changeUserStatus(String filePath, String userEmail, UserStatus newStatus) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         UserDao dao = new UserDao(filePath);
-        dao.changeUserStatus(userName, newStatus);
+        dao.changeUserStatus(userEmail, newStatus);
     }
 }

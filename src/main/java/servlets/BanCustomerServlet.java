@@ -1,8 +1,7 @@
 package servlets;
 
-import businessLayer.Booking;
+import businessLayer.User;
 import businessLayer.UserStatus;
-import serviceLayer.BookingService;
 import serviceLayer.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -23,12 +22,11 @@ public class BanCustomerServlet extends HttpServlet {
 
         String propertyFilepath = "D:\\LABS_5_SEM\\OS_i_sist_progr\\CourseWork\\CourseWork\\resources\\connectionInfo.txt";
 
-        int bookingNumber = Integer.parseInt(request.getParameter("banBookingNumber"));
-        String userName = request.getParameter("banCustomerName");
+        String userEmail = request.getParameter("email");
 
         UserService userService  = new UserService();
         try {
-            userService.changeUserStatus(propertyFilepath, userName, UserStatus.BANNED);
+            userService.changeUserStatus(propertyFilepath, userEmail, UserStatus.BANNED);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -39,7 +37,22 @@ public class BanCustomerServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/roomInfo.jsp");
+        List<User> users = null;
+        try {
+            users = userService.getUserByStatus(propertyFilepath, UserStatus.USER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        request.setAttribute("customers", users);
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/usersSettings.jsp");
         dispatcher.forward(request, response);
 
     }

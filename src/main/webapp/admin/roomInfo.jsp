@@ -31,7 +31,8 @@
 <div id="navbar">
     <a href="UsersSettingsServlet">Users</a>
     <a class="active" href="javascript:void(0)">Rooms</a>
-    <a href="AdminsSettingsServlet">Admins</a>
+    <a href="EmployeesSettingsServlet">Employees</a>
+    <a href="HistoryServlet">History</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
     <div class="table-responsive">
@@ -68,6 +69,9 @@
                         <form action="CancelBookingServlet" method="post">
                             <input type="hidden" id="bookingNumber" name="bookingNumber" value="${item.bookingNumber}">
                             <input type="hidden" id="roomNumber" name="roomNumber" value="${currentRoomNumber}">
+                            <input type="hidden" id="cancelName" name="cancelName" value="${item.customerName}">
+                            <input type="hidden" id="dateIn" name="dateIn" value="${item.dateIn}">
+                            <input type="hidden" id="dateOut" name="dateOut" value="${item.dateOut}">
                             <button value="cancelBooking" class="button btn-info btn-sm font-weight-bold">Cancel
                                 booking
                             </button>

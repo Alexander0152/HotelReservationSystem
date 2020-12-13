@@ -1,5 +1,5 @@
 package servlets;
-;
+
 import businessLayer.User;
 import businessLayer.UserStatus;
 import serviceLayer.UserService;
@@ -14,19 +14,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/AdminsSettingsServlet")
-public class AdminsSettingsServlet extends HttpServlet {
+@WebServlet("/MakeUserAnEmployeeServlet")
+public class MakeUserAnEmployeeServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String propertyFilepath = "D:\\LABS_5_SEM\\OS_i_sist_progr\\CourseWork\\CourseWork\\resources\\connectionInfo.txt";
 
-        UserService userService = new UserService();
+        String userEmail = request.getParameter("userEmail");
 
-        List<User> admins = null;
+        UserService userService  = new UserService();
         try {
-            admins = userService.getUserByStatus(propertyFilepath, UserStatus.ADMIN);
+            userService.changeUserStatus(propertyFilepath, userEmail, UserStatus.EMPLOYEE);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -37,9 +37,23 @@ public class AdminsSettingsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.setAttribute("admins", admins);
+        List<User> users = null;
+        try {
+            users = userService.getUserByStatus(propertyFilepath, UserStatus.USER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/adminsSettings.jsp");
+        request.setAttribute("customers", users);
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/usersSettings.jsp");
         dispatcher.forward(request, response);
+
     }
 }

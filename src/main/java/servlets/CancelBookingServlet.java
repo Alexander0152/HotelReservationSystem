@@ -2,6 +2,7 @@ package servlets;
 
 import businessLayer.Booking;
 import serviceLayer.BookingService;
+import serviceLayer.HistoryService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +27,23 @@ public class CancelBookingServlet extends HttpServlet {
         BookingService bookingService = new BookingService();
         try {
             bookingService.removeBooking(propertyFilepath, bookingNumber);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        HistoryService historyService = new HistoryService();
+        String customerName = request.getParameter("cancelName");
+        String dateIn = request.getParameter("dateIn");
+        String dateOut = request.getParameter("dateOut");
+
+        try {
+            historyService.removeBookingFromHistory(propertyFilepath, customerName, dateIn, dateOut);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

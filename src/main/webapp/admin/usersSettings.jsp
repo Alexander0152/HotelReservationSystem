@@ -30,17 +30,20 @@
 </div>
 <div id="navbar">
     <a class="active" href="ViewRoomsServlet">Users</a>
-    <a href="BackToUsersSettingsServlet">Rooms</a>
-    <a href="AdminsSettingsServlet">Admins</a>
+    <a href="BackToRoomsSettingsServlet">Rooms</a>
+    <a href="EmployeesSettingsServlet">Employees</a>
+    <a href="HistoryServlet">History</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
     <div class="table-responsive">
         <h5 class="font-weight-bold text-center">Customers</h5><br>
-        <table class="table table-striped table-bordered text-center border-dark">
+        <input class="form-control" type="text" placeholder="Enter user name" id="search-text" onkeyup="tableSearch()">
+        <table class="table table-striped table-bordered text-center border-dark" id="info-table">
             <thead>
             <tr class="border-dark">
                 <td class="border-dark">User name</td>
                 <td class="border-dark">User email</td>
+                <td class="border-dark"></td>
             </tr>
             </thead>
             <tbody>
@@ -48,6 +51,18 @@
                 <tr>
                     <td class="border-dark">${item.name}</td>
                     <td class="border-dark">${item.email}</td>
+                    <td class="border-dark">
+                        <form action="BanCustomerServlet" method="post">
+                            <input type="hidden" id="email" name="email" value="${item.email}">
+                            <button value="Ban" id="btnBan" class="button btn-primary btn-sm font-weight-bold">Ban
+                            </button>
+                        </form>
+                        <form action="MakeUserAnEmployeeServlet" method="post">
+                            <input type="hidden" id="userEmail" name="userEmail" value="${item.email}">
+                            <button value="Ban" id="btnMakeEmployee" class="button btn-primary btn-sm font-weight-bold">
+                                Make an employee
+                            </button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
@@ -55,5 +70,26 @@
         </table>
     </div>
 </div>
+<script>
+    function tableSearch() {
+        var phrase = document.getElementById('search-text');
+        var table = document.getElementById('info-table');
+        var regPhrase = new RegExp(phrase.value, 'i');
+        var flag = false;
+        for (var i = 1; i < table.rows.length; i++) {
+            flag = false;
+            for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+                if (flag) break;
+            }
+            if (flag) {
+                table.rows[i].style.display = "";
+            } else {
+                table.rows[i].style.display = "none";
+            }
+
+        }
+    }
+</script>
 </body>
 </html>
