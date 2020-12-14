@@ -32,7 +32,7 @@
     <a class="active" href="ViewRoomsServlet">Users</a>
     <a href="BackToRoomsSettingsServlet">Rooms</a>
     <a href="EmployeesSettingsServlet">Employees</a>
-    <a class="active" href="HistoryServlet">History</a>
+    <a href="HistoryServlet">History</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.98)">
     <div class="table-responsive">

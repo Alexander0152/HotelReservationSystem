@@ -58,8 +58,8 @@ public class BookRoomServlet extends HttpServlet {
         Booking newBooking = new Booking();
 
         int roomNumber = (Integer)session.getAttribute("roomNumber");
-        String customerFirstName = request.getParameter("fname");
-        String customerLastName = request.getParameter("lname");
+        String customerFirstName = request.getParameter("fname").replaceAll("\\s", "");
+        String customerLastName = request.getParameter("lname").replaceAll("\\s", "");
         String customerFullName = customerFirstName + " "+ customerLastName;
         Date dateIn = Date.valueOf((String) session.getAttribute("startDate"));
         Date dateOut = Date.valueOf((String) session.getAttribute("endDate"));

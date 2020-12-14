@@ -92,8 +92,7 @@ public class CustomerDao {
             System.err.println("Error: File doesn't exist!");
         }
 
-        String delimeter = " "; // Разделитель
-        String[] subStr = name.split(delimeter);
+        String[] subStr = name.split("\\s+");
         String firsName = subStr[0];
         String lastName = subStr[1];
 
