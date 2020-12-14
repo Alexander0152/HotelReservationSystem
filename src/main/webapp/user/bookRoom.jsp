@@ -23,7 +23,7 @@
 <div id="navbar">
     <a href="ViewRoomsServlet">Rooms</a>
     <a class="active" href="index.jsp">Booking</a>
-    <a href="javascript:void(0)">Contact</a>
+    <a href="ContactsServlet">Contacts</a>
 </div>
 <div class="container" style="background-color: rgba(255,255,255,0.9)">
     <div class="row">

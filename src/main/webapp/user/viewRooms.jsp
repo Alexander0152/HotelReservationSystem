@@ -32,7 +32,7 @@
 <div id="navbar">
     <a class="active" href="ViewRoomsServlet">Rooms</a>
     <a href="index.jsp">Booking</a>
-    <a href="javascript:void(0)">Contact</a>
+    <a href="ContactsServlet">Contacts</a>
 </div>
 
 <img id="Economy" img src="images/Economy1.jpg" alt="Economy" style="left: 120px; top: 350px;" width="660" height="426"

@@ -25,7 +25,7 @@
 <div id="navbar">
     <a href="ViewRoomsServlet">Rooms</a>
     <a class="active" href="javascript:void(0)">Booking</a>
-    <a href="javascript:void(0)">Contact</a>
+    <a href="ContactsServlet">Contacts</a>
 </div>
 
 <div class="main-page">

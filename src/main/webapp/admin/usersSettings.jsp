@@ -54,7 +54,7 @@
                     <td class="border-dark">
                         <form action="BanCustomerServlet" method="post">
                             <input type="hidden" id="email" name="email" value="${item.email}">
-                            <button value="Ban" id="btnBan" class="button btn-primary btn-sm font-weight-bold">Ban
+                            <button value="Ban" id="btnBan" class="button btn-primary btn-sm font-weight-bold">Ban user
                             </button>
                         </form>
                         <form action="MakeUserAnEmployeeServlet" method="post">

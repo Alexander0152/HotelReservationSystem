@@ -1,14 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 12/10/2020
-  Time: 2:43 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <%--    <script type="text/javascript" src="../javascript/jquery/search_jquery.ui.datepicker.js"></script>--%>
     <link rel="stylesheet" href="styleMain.css">
     <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
     <script src="webjars/momentjs/2.5.1/moment.js"></script>
@@ -22,16 +17,30 @@
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="webjars/bootstrap/4.5.3/css/bootstrap-grid.min-jsf.css">
+    <title>Contacts</title>
 </head>
 <body>
 <jsp:include page="home.jsp"/>
+
 <div id="navbar">
     <a href="ViewRoomsServlet">Rooms</a>
-    <a class="active" href="index.jsp">Booking</a>
-    <a href="ContactsServlet">Contacts</a>
+    <a href="index.jsp">Booking</a>
+    <a class="active" href="javascript:void(0)">Contact</a>
 </div>
-<div class="container text-center font-weight-bold text-danger" style="background-color: rgba(255,255,255,0.9)">
-    <h3 class>You are banned on this site and can't book rooms!</h3>
+<div class="container" style="background-color: rgba(255,255,255,0.9)">
+    <div class="row">
+        <div class="container w-50 p-3">
+            <h3>
+                +375 (17) 209-90-62
+            </h3>
+            <h3>
+                +375 (17) 209-90-74
+            </h3><br>
+            <h3>
+                clavertonhotel@gmail.com
+            </h3>
+        </div>
+    </div>
 </div>
 </body>
 </html>
